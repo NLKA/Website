@@ -6,8 +6,8 @@
     $pages[0] = array("inp/index.html","Die Nightline","index.html");
     $pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
     $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
-    $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
-    $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
+    // $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
+    $pages[3] = array("inp/links.html", "Anlaufstellen", "links.html");
     
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
@@ -17,11 +17,11 @@
             case "unterstuetzen":
                 $incId = 2;
             break;
-            case "impressum":
-                $incId = 3;
-            break;
+            // case "impressum":
+            //     $incId = 3;
+            // break;
             case "links":
-                $incId = 4;
+                $incId = 3;
             break;
             default:
                 $incId = 0;
@@ -35,7 +35,7 @@
 <head>
   <meta charset="utf-8"/>
 
-  <title>Nightline Karlsruhe | <?php echo $pages[$incId][1]; ?></title>
+  <title>Nightline Karlsruhe - Studentisches Zuhörtelefon</title>
   <meta name="description" content="Nightline, Karlsruhe, Pforzheim, Zuhörtelefon"/>
   <meta name="author" content="Nightline Karlsruhe e.V."/>
 
@@ -62,11 +62,10 @@
 		<div class="ym-wrapper" id="navigationContainer">
 		<ul>
         <?php
-            for ($k=0;$k<count($pages);$k++) {
-                if (count($pages[$k])==1 || $k == 3) {
+            for ($k=0;$k<count($pages);$k++){
+                if (count($pages[$k])==1){
                     continue;
                 }
-
                 echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
             }
             
