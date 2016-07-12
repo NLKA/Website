@@ -1,0 +1,255 @@
+/* Google Font API */
+/* @import url("http://fonts.googleapis.com/css?family=Droid+Serif");
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans:700"); */
+@import url("fonts.css");
+
+/* import framework core */
+@import url("../yaml/core/base.min.css");
+
+/* import screen layout */
+@import url("../yaml/navigation/hlist.css");
+@import url("../yaml/forms/gray-theme.css");
+
+@import url("screen.css");
+@import url("typography.css");
+
+/* import print layout */
+@import url("print.css");
+
+/* Definitions */
+
+body, header { 
+	min-width: 700px; 
+}
+
+.ym-wrapper {
+  max-width: 55em;
+}
+
+@media only screen and (max-width: 900px) {
+	.ym-wbox { 
+		padding: 0px; 
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	.ym-wbox { 
+		padding: 10px; 
+	}
+}
+
+/* Changes done by admin */
+body > header { background: none; }
+
+@media only screen and (max-width: 900px) {
+	body { 
+    	color: #CCC;
+    	background-image: url(../img/background.jpg);
+    	background-color: black;
+    	background-size: 1200px auto;
+    	background-repeat: no-repeat;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	body { 
+    	color: #CCC;
+    	background-image: url(../img/background.jpg);
+    	background-color: black;
+    	background-size: 100% auto;
+    	background-repeat: no-repeat;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	main {
+		padding-top: 30px;
+	}
+}
+
+a { 
+	color: #3d47cf;
+}
+
+a:hover {
+	color: white;
+	background-color: #3d47cf; 
+} 
+
+p {
+	margin: 0px;
+}
+
+h2, .box h2 {
+	color: #3d47cf;
+	text-align: center;
+	font-weight: 700;
+
+	padding: 24px;
+}
+
+@media only screen and (max-width: 900px) {
+	.info {
+		font-size: 29px;
+		text-align: justify;
+		background-color: white;
+	}
+
+	.box {
+		box-shadow: none;
+		border: none;
+		font-family: "Droid Sans", Arial, Helvetica;
+
+		border-radius: 12px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	.info {
+		font-size: 18px;
+		text-align: justify;
+		background-color: white;
+	}
+
+	.box {
+		box-shadow: none;
+		border: none;
+		font-family: "Droid Sans", Arial, Helvetica;
+
+		border-radius: 5px;
+	}
+}
+
+.ym-hlist {
+	background: none;
+}
+
+.ym-hlist ul {
+	display: block;
+
+	margin-left: auto;
+	margin-right: auto;
+	left: 0px;
+}
+
+@media only screen and (max-width: 900px) {
+	.ym-hlist ul li a:active, .ym-hlist ul li a:hover, .ym-hlist ul li a:focus, .ym-hlist ul li a {
+		color: white;
+		font-size: 23px;
+		text-shadow: none;
+
+		margin-left: auto;
+		margin-right: auto;
+	
+		padding: 0 0.55em;
+
+		left: 0px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	.ym-hlist ul li a:active, .ym-hlist ul li a:hover, .ym-hlist ul li a:focus, .ym-hlist ul li a {
+		color: white;
+		font-size: 18px;
+		text-shadow: none;
+
+		margin-left: auto;
+		margin-right: auto;
+	
+		padding: 0 0.55em;
+
+		left: 0px;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	#logoTop {
+		display: block;
+
+		position: relative;
+
+		height: 150px;
+
+		margin-left: auto;
+		margin-right: auto;
+
+		left: 0px;
+		top: 30px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	#logoTop {
+		display: block;
+
+		position: relative;
+
+		height: 115px;
+
+		margin-left: auto;
+		margin-right: auto;
+		left: 0px;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	#navigationContainer {
+		display: block;
+
+		position: relative;
+
+		width: 720px;
+		height: 50px;
+
+		top: 16px;
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#navigation {
+		position: relative;
+		top: 40px;
+		height: 70px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	#navigationContainer {
+		display: block;
+
+		width: 574px;
+		height: 50px;
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#navigation {
+		position: relative;
+		top: 10px;
+	}
+}
+
+#videoContainer {
+	width: 100%;
+}
+
+#imageVideo {
+	display: block;
+
+	margin-left: auto;
+	margin-right: auto;
+	left: 0px;
+
+	height: 275px;
+	width: 485px;
+}
+
+footer {
+	background-color: black;
+	text-align: center;
+
+	color: white;
+}
