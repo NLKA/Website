@@ -13,7 +13,7 @@
 
     <?php
       if ($_GET['pull'] == true) {
-        exec("git pull -v /srv/www/htdocs/hosting/nightline 2>&1", $output, $return_var);
+        exec("git pull -v origin master 2>&1", $output, $return_var);
         
         if ($return_var == 0) {
           echo "<span style='color: green;'>Command completed successfully!</span>";
