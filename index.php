@@ -4,24 +4,24 @@
     // Falls die Seite nicht im Menü erschienen soll (z.B. Impressum), die letzen
     // beiden Attribute weglassen
     $pages[0] = array("inp/index.html","Die Nightline","index.html");
-    $pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
-    $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
-    $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
-    $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
+    //$pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
+    $pages[1] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
+    $pages[2] = array("inp/impressum.html", "Impressum","impressum.html");
+    $pages[3] = array("inp/links.html", "Anlaufstellen", "links.html");
     
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
-            case "mitmachen":
+            //case "mitmachen":
+                //$incId = 1;
+            //break;
+            case "unterstuetzen":
                 $incId = 1;
             break;
-            case "unterstuetzen":
+            case "impressum":
                 $incId = 2;
             break;
-            case "impressum":
-                $incId = 3;
-            break;
             case "links":
-                $incId = 4;
+                $incId = 3;
             break;
             default:
                 $incId = 0;
