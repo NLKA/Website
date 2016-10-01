@@ -80,6 +80,14 @@ p {
 	margin: 0px;
 }
 
+h1 {
+	color: #3d47cf;
+	text-align: center;
+	font-weight: 700;
+	padding-top: 30px;
+	padding-bottom: 18px;
+}
+
 h2, .box h2 {
 	color: #3d47cf;
 	text-align: center;
