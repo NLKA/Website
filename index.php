@@ -5,7 +5,7 @@
     // beiden Attribute weglassen
     $pages[0] = array("inp/index.html","Die Nightline","index.html");
     //$pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
-    $pages[1] = array("inp/leitbild.html","Leitbild","leitbild.html");
+    $pages[1] = array("inp/index.html","Leitbild","leitbild.html");
     $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
     $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
     $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
