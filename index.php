@@ -5,23 +5,27 @@
     // beiden Attribute weglassen
     $pages[0] = array("inp/index.html","Die Nightline","index.html");
     //$pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
-    $pages[1] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
-    $pages[2] = array("inp/impressum.html", "Impressum","impressum.html");
-    $pages[3] = array("inp/links.html", "Anlaufstellen", "links.html");
+    $pages[1] = array("inp/leitbild.html","Leitbild","leitbild.html");
+    $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
+    $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
+    $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
     
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
             //case "mitmachen":
                 //$incId = 1;
             //break;
-            case "unterstuetzen":
+	    case "leitbild":
                 $incId = 1;
-            break;
-            case "impressum":
+	    break;
+            case "unterstuetzen":
                 $incId = 2;
             break;
-            case "links":
+            case "impressum":
                 $incId = 3;
+            break;
+            case "links":
+                $incId = 4;
             break;
             default:
                 $incId = 0;
