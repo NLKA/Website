@@ -101,6 +101,8 @@ h2, .box h2 {
 		font-size: 29px;
 		text-align: justify;
 		background-color: white;
+		
+		padding-bottom: 70px;
 	}
 
 	.box {
@@ -116,6 +118,8 @@ h2, .box h2 {
 	.info {
 		padding-left: 50px;
 		padding-right: 50px;
+		padding-bottom: 45px;
+
 
 		font-size: 18px;
 		text-align: justify;
