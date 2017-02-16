@@ -56,7 +56,7 @@
 </head>
 
 <body>
-  <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div>
+  <!-- <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div> -->
 
 	<header>
 		<div class="ym-wrapper">
