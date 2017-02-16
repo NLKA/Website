@@ -56,6 +56,8 @@
 </head>
 
 <body>
+  <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div>
+
 	<header>
 		<div class="ym-wrapper">
 			<div class="ym-wbox">
@@ -97,7 +99,10 @@
 			</div>
 		</div>
 	</footer>
-	
+
+  <script type="text/javascript" src='js/jquery.js'></script>
+	<script type="text/javascript" src='js/anfordern.js'></script>
+
 	<!-- Piwik -->
 	<script type="text/javascript">
   		var _paq = _paq || [];

@@ -186,6 +186,29 @@ h2, .box h2 {
 }
 
 @media only screen and (max-width: 900px) {
+	#topBar {
+		opacity: 0.95;
+
+		background-color: white;
+
+		border-radius: 8px;
+
+		width: 100%;
+	}
+
+	#topbarText {
+		font-family: "Droid Sans", Sans;
+
+		color: black;
+
+		font-weight: bold;
+
+		padding: 8px;
+
+		font-size: 40px;
+		text-align: center;
+	}
+
 	#logoTop {
 		display: block;
 
@@ -202,6 +225,29 @@ h2, .box h2 {
 }
 
 @media only screen and (min-width: 901px) {
+	#topBar {
+		opacity: 0.95;
+
+		background-color: white;
+
+		border-radius: 6px;
+
+		width: 100%;
+	}
+
+	#topbarText {
+		font-family: "Droid Sans", Sans;
+
+		color: black;
+
+		font-weight: bold;
+
+		padding: 10px;
+
+		font-size: 30px;
+		text-align: center;
+	}
+
 	#logoTop {
 		display: block;
 
