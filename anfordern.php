@@ -1,7 +1,7 @@
 <?php
 
 // send mail
-$to      = 'peerreise@gmail.com';
+$to      = 'karlsruhe@nightlines.eu';
 $subject = '[NL] Telefondienst angefordert';
 $message = 'Es wurde heute ein Telefondienst angefordert. Wer wird heute Abend da sein? -- Nightline Bot';
 $headers = 'From: no-reply@nightline-karlsruhe.de' . "\r\n" .
