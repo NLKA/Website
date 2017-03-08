@@ -67,6 +67,12 @@ body > header { background: none; }
 	}
 }
 
+@media only screen and (min-width: 901px) {
+	main {
+		min-height: 800px;
+	}
+}
+
 a { 
 	color: #3d47cf;
 }
