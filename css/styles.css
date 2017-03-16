@@ -117,6 +117,8 @@ h2, .box h2 {
 		background-color: white;
 		
 		padding-bottom: 70px;
+		
+		line-height: 150%;
 	}
 
 	.box {
@@ -138,6 +140,8 @@ h2, .box h2 {
 		font-size: 18px;
 		text-align: justify;
 		background-color: white;
+		
+		line-height: 150%;
 	}
 
 	.box {
