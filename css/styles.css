@@ -330,6 +330,20 @@ h2, .box h2 {
 	width: 485px;
 }
 
+@media only screen and (max-width: 900px) {
+	#calendar {
+		height: 300px;
+		width: 400px;
+	}
+}
+
+@media only screen and (min-width: 901px) {
+	#calendar {
+		height: 300px;
+		width: 600px;
+	}
+}
+
 footer {
 	background-color: black;
 	text-align: center;
