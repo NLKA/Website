@@ -333,14 +333,14 @@ h2, .box h2 {
 @media only screen and (max-width: 900px) {
 	#calendar {
 		height: 300px;
-		width: 400px;
+		width: 420px;
 	}
 }
 
 @media only screen and (min-width: 901px) {
 	#calendar {
 		height: 300px;
-		width: 600px;
+		width: 650px;
 	}
 }
 
