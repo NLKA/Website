@@ -332,19 +332,9 @@ h2, .box h2 {
 
 #calendar {
 	height: 300px;
+	width:100%;
+		
 	border: none;
-}
-
-@media only screen and (max-width: 900px) {
-	#calendar {
-		width: 420px;
-	}
-}
-
-@media only screen and (min-width: 901px) {
-	#calendar {
-		width: 650px;
-	}
 }
 
 footer {
