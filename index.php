@@ -57,7 +57,7 @@
 
 <body>
   <!-- <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div> -->
-	<div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar></p></div>
+	<div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar</p></div>
 
 	<header>
 		<div class="ym-wrapper">
