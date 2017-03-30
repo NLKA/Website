@@ -48,8 +48,13 @@
 
 <body>
   	<!-- <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div> -->
-	<div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div>
-
+	<div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div>	
+	<script src='js/jquery.js'></script>
+	<script>
+		$('#topBar').toggle();
+		$('#topBar').slideToggle();
+	</script>
+	
 	<header>
 		<div class="ym-wrapper">
 			<div class="ym-wbox">
