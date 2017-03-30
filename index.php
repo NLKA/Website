@@ -1,10 +1,6 @@
 <?php
-    // Jede Seite, die im Menue aufgefuehrt ist einpflegen. Muster:
-    // includeseite, Menue bzw. HTML-Titel, Menue-URL-Alias
-    // Falls die Seite nicht im Menü erschienen soll (z.B. Impressum), die letzen
-    // beiden Attribute weglassen
+    // Nagivation links
     $pages[0] = array("inp/index.html","Die Nightline","index.html");
-    //$pages[1] = array("inp/mitmachen.html","Mitmachen","mitmachen.html");
     $pages[1] = array("inp/leitbild.html","Wir über uns","leitbild.html");
     $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
     $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
@@ -12,9 +8,6 @@
     
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
-            //case "mitmachen":
-                //$incId = 1;
-            //break;
 	    case "leitbild":
                 $incId = 1;
 	    break;
@@ -44,10 +37,8 @@
 	<meta name="description" content="Nightline, Karlsruhe, Pforzheim, Zuhörtelefon"/>
   	<meta name="author" content="Nightline Karlsruhe e.V."/>
 
-  	<!-- mobile viewport optimisation -->
   	<meta name="viewport" content="width=device-width">
 
-  	<!-- stylesheets -->
   	<link rel="stylesheet" href="css/styles.css" type="text/css"/>
 
   	<!--[if lte IE 7]>
@@ -56,7 +47,7 @@
 </head>
 
 <body>
-  <!-- <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div> -->
+  	<!-- <div id='topBar'><p id='topbarText'>☎️ Wir können heute Abend für dich erreichbar sein: <a id='anfordern'>Telefondienst anfordern</a></div> -->
 	<div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div>
 
 	<header>
