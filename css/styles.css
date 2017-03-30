@@ -124,7 +124,7 @@ h2, .box h2 {
 	.box {
 		box-shadow: none;
 		border: none;
-		font-family: "Droid Sans", Arial, Helvetica;
+		font-family: "Droid Sans", Helvetica, Arial, Sans;
 
 		border-radius: 20px;
 	}
