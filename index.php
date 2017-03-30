@@ -52,7 +52,7 @@
 	<script src='js/jquery.js'></script>
 	<script>
 		$('#topBar').toggle();
-		$('#topBar').slideToggle();
+		$('#topBar').delay(600).slideToggle();
 	</script>
 	
 	<header>
