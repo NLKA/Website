@@ -69,7 +69,7 @@
        					<?php
             					for ($k=0;$k<count($pages);$k++){
 							// Second condition removes impressum from title bar, third removes submit
-                					if (count($pages[$k]) == 1 || $k == 3 || $K == 5){
+                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5){
                     						continue;
                 					}
                 					echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
