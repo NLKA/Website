@@ -5,7 +5,8 @@
     $pages[2] = array("inp/unterstuetzen.html","Unterstützen","unterstuetzen.html");
     $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
     $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
-    
+    $pages[5] = array("inp/submit.html", "Submit", "submit.html");
+
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
 	    case "leitbild":
@@ -20,6 +21,9 @@
             case "links":
                 $incId = 4;
             break;
+	    case "submit":
+		$incId = 5;
+	    break;
             default:
                 $incId = 0;
         }
@@ -64,8 +68,8 @@
 				<ul>
        					<?php
             					for ($k=0;$k<count($pages);$k++){
-							// Second condition removes impressum from title bar, no idea what the first one does.
-                					if (count($pages[$k])==1 || $k == 3){
+							// Second condition removes impressum from title bar, third removes submit
+                					if (count($pages[$k]) == 1 || $k == 3 || $K == 5){
                     						continue;
                 					}
                 					echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
