@@ -3,7 +3,8 @@
 include_once('/etc/apache2/db-passwords/nightline.php');
 
 // Check permission to view
-if (crypt($_GET['token']) != "$1$ZxWC99bA$YJAq5Xh8pnO/.qDjy1RaT0") {
+$tokenHash = "0c7c36061cc3c9027fcfecde263e229ef718ae66835ed88348a50f12b966e70c";
+if (hash("sha256", $_GET['token']) != $tokenHash) {
 	echo "Permission token invalid";
 	exit;
 }
