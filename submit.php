@@ -15,6 +15,12 @@ if (isset($_POST['g-recaptcha-response'])) {
 	echo "Error: No Captcha data";
 	exit;
 }
+
+// Check publishing permission flag
+if ($_POST['publishPermission'] != true) {
+	echo "Error: Permission checkbox not set";
+	exit;
+}
        
 // Write story to db if set
 if (isset($_POST['story'])) {
