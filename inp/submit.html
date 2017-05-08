@@ -23,7 +23,9 @@
 		}
 
 		var captchaSolved = false;
-		$(document).on('change', '#permissionCheckbox', updateButtonState());
+		$(document).on('change', '#permissionCheckbox', function() {
+			updateButtonState();
+		});
 
 		function capenable() {
 			captchaSolved = true;
