@@ -1,5 +1,23 @@
 <main>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script>
+		if (getParameterByName('submissionSuccess') == true) {
+			alert("Deine Einsendung war erfolgreich. Vielen Dank!");
+		}
+
+		function getParameterByName(name) {
+    		var name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+
+    		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    
+    		var results = regex.exec(location.search);
+    		if (results === null) {
+    			return ''
+    		} else {
+    			return decodeURIComponent(results[1].replace(/\+/g, ' '));
+    		}
+		}
+	</script>
 
 	<div class="ym-wrapper">
         <div class="ym-wbox">

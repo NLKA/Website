@@ -27,7 +27,9 @@ if (isset($_POST['story'])) {
 
 	$sqlConnetion->close();
 
-	echo "Submission saved";
+	header("Location: submit.html?submissionSuccess=1");
+} else {
+	echo "Error: Nothing to be submitted";
 }
 
 ?>
