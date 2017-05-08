@@ -2,6 +2,20 @@
 
 include_once('/etc/apache2/db-passwords/nightline.php');
 
+// Check captcha
+if (isset($_POST['g-recaptcha-response'])) {
+ 	$captcha = $_POST['g-recaptcha-response'];
+ 	$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$CAPTCHA_SECRET."&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+
+ 	if ($response['success'] == false) {
+    	echo 'Error: Captcha failed';
+    	exit;
+    }
+} else {
+	echo "Error: No Captcha data";
+	exit;
+}
+       
 // Write story to db if set
 if (isset($_POST['story'])) {
 	$sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
