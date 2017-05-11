@@ -1,32 +1,10 @@
 <main>
-	<!-- Site scripts -->
-	<script>
-		// Check if success alert should be displayed
-		if (getParameterByName('success') == true) {
-			alert("Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein.");
-		}
-
-		function getParameterByName(name) {
-    		var name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-
-    		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    
-    		var results = regex.exec(location.search);
-    		if (results === null) {
-    			return ''
-    		} else {
-    			return decodeURIComponent(results[1].replace(/\+/g, ' '));
-    		}
-		}
-	</script>
-	<!-- Site scripts -->
-
 	<div class="ym-wrapper">
         <div class="ym-wbox">
             <div class="box info">
-                <h2>Unser neuer Telefondienst</h2>
-                <p>Damit wir genau dann erreichbar sind, wenn du uns brauchst, <b>kannst du ab sofort Bescheid sagen, wenn du an einem Tag anrufen möchtest </b>, an dem Nightliner auf Bereitschaft sein können. So können wir mehr potentielle Termine für unser Telefonangebot bereitstellen.</p>
-                <h3>So geht es</h3>
+                <h1>Unser neuer Telefondienst</h1>
+                <p>Damit wir genau dann erreichbar sind, wenn du uns brauchst, <b>kannst du ab sofort Bescheid sagen, wenn du an einem Tag anrufen möchtest</b>, an dem Nightliner auf Bereitschaft sein können. So können wir mehr potentielle Termine für unser Telefonangebot bereitstellen.</p>
+                <h2>So geht es</h2>
                 <p>Wenn do oben auf unserer Website einen Banner siehst, der einen Termin vorschlägt, klicke einfach bis zum Nachmittag dieses Tages auf "Anfordern". <br/>
                 	Du siehst dann eine Bestätigung: <i>"Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein"</i>. <br/>
                 	Dann einfach <b>am angeforderten Tag zwischen 21 und 0 Uhr</b> unter <b>0721-75406646</b> anrufen. Wir freuen uns auf das Gespräch!
@@ -34,4 +12,26 @@
             </div>
         </div>
    	 </div>
+
+     <!-- Site scripts -->
+    <script>
+        // Check if success alert should be displayed
+        if (getParameterByName('success') == true) {
+            alert("Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein.");
+        }
+
+        function getParameterByName(name) {
+            var name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    
+            var results = regex.exec(location.search);
+            if (results === null) {
+                return ''
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+        }
+    </script>
+    <!-- Site scripts -->
 </main>
