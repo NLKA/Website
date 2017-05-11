@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^(piwik)($|/) - [L]
+RewriteRule index.html index.php [QSA]
+RewriteRule mitmachen.html index.php?page=mitmachen [QSA]
+RewriteRule unterstuetzen.html index.php?page=unterstuetzen [QSA]
+RewriteRule impressum.html index.php?page=impressum [QSA]
+RewriteRule links.html index.php?page=links [QSA]
+RewriteRule leitbild.html index.php?page=leitbild [QSA]
+RewriteRule submit.html index.php?page=submit [QSA]
+RewriteRule on-demand.html index.php?page=on-demand [QSA]
