@@ -6,26 +6,30 @@
     $pages[3] = array("inp/impressum.html", "Impressum","impressum.html");
     $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
     $pages[5] = array("inp/submit.html", "Submit", "submit.html");
+    $pages[6] = array("inp/on-demand.html", "On Demand", "on-demand.html");
 
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
-	    case "leitbild":
-                $incId = 1;
-	    break;
-            case "unterstuetzen":
-                $incId = 2;
+          case "leitbild":
+            $incId = 1;
             break;
-            case "impressum":
-                $incId = 3;
+          case "unterstuetzen":
+            $incId = 2;
             break;
-            case "links":
-                $incId = 4;
+          case "impressum":
+            $incId = 3;
             break;
-	    case "submit":
-		$incId = 5;
-	    break;
-            default:
-                $incId = 0;
+          case "links":
+            $incId = 4;
+            break;
+          case "submit":
+		        $incId = 5;
+            break;
+          case "on-demand":
+            $incId = 6;
+            break;
+          default:
+            $incId = 0;
         }
     } else {
         $incId = 0;
@@ -68,8 +72,8 @@
 				<ul>
        					<?php
             					for ($k=0;$k<count($pages);$k++){
-							// Second condition removes impressum from title bar, third removes submit
-                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5){
+							// Second condition removes impressum from title bar, third removes submit, last removes on-demand
+                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6){
                     						continue;
                 					}
                 					echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
