@@ -17,7 +17,10 @@
     <script>
         // Check if success alert should be displayed
         if (getParameterByName('success') == true) {
-            alert("Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein.");
+            setTimeout(function() {
+                alert("Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein.");
+
+            }, 500);
         }
 
         function getParameterByName(name) {
