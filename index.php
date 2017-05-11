@@ -100,9 +100,6 @@
 		</div>
 	</footer>
 
-  <script type="text/javascript" src='js/jquery.js'></script>
-	<script type="text/javascript" src='js/anfordern.js'></script>
-
 	<!-- Piwik -->
 	<script type="text/javascript">
   		var _paq = _paq || [];
