@@ -12,5 +12,5 @@ include_once('/etc/apache2/db-passwords/nightline.php');
 
 	$sqlConnetion->close();
 
-	header("Location: on-demand.html/?success=1");
+	header("Location: on-demand.html?success=1");
 ?>
