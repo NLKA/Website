@@ -71,7 +71,7 @@
 			<div class="ym-wrapper" id="navigationContainer">
 				<ul>
        					<?php
-            					for ($k=0;$k<count($pages);$k++){
+            					for ($k=0; $k<count($pages); $k++){
 							// Second condition removes impressum from title bar, third removes submit, last removes on-demand
                 					if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6){
                     						continue;
