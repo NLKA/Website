@@ -62,7 +62,7 @@
 		<div class="ym-wrapper">
 			<div class="ym-wbox">
         			<h1>
-					<img id="logoTop" src="img/nlka_logo_web.png" alt="Nightline Karlsruhe" />
+					<img id="logoTop" src="img/nlka_logo_moon.png" alt="Nightline Karlsruhe" />
         			</h1>
 			</div>
 		</div>
