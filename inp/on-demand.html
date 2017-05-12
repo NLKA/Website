@@ -26,6 +26,7 @@
         // Check if success alert should be displayed
         if (getParameterByName('success') == true) {
             setTimeout(function() {
+                $('#button').append(" ✔︎");
                 alert("Vielen Dank, wir haben deine Anforderung erhalten und werden an dem gewünschten Tag telefonisch erreichbar sein.");
 
             }, 500);
