@@ -33,6 +33,8 @@ if ($_GET['op'] == "confirm") {
     $stmt->execute();
     $stmt->close();
 
+    echo "try fetch date";
+
     // Fetch date
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE serviceDayId = ?");
     $stmt->bind_param('s', $_GET['id']);
@@ -68,6 +70,6 @@ if ($_GET['op'] == "confirm") {
 $sqlConnetion->close();
 
 // Redirect back
-header("Location: serviceDays.php?token=".$_GET['token']);
+//header("Location: serviceDays.php?token=".$_GET['token']);
 
 ?>
