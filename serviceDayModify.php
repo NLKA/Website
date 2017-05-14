@@ -20,7 +20,7 @@ if ($_GET['op'] == "delete") {
 }
 
 if ($_GET['op'] == "add") {
-	$stmt = $sqlConnetion->prepare("INSERT INTO serviceDay (date) VALUES (?)");
+	$stmt = $sqlConnetion->prepare("INSERT INTO serviceDay (date, service) VALUES (?, 0)");
     $stmt->bind_param('s', $_GET['date']);
     $stmt->execute();
     $stmt->close();
