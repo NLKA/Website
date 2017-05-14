@@ -54,27 +54,47 @@
   <?php
     include_once('/etc/apache2/db-passwords/nightline.php');
 
-    // Check if there are scheduled services in the future or today that are bookable
+    // Prepare sql connection
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
+    // Check if there is a cofirmed service in the future or today
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
 
-    $sqlConnetion->close();
-
-    // ...and display topbar if this is the case
     if ($results->num_rows > 0) {
+      // Display that a service is available
       $firstRow = $results->fetch_assoc();
       if ($firstRow['date'] == date('Y-m-d')) {
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        echo "<div id='topBar'><p id='topbarText'>☎️ Wir sind heute 21-0h für dich erreichbar unter 0721-75406646</div>";
       } else {
         $date = new DateTime($firstRow['date']);
         $dateOutputString = $date->format('d.m.');
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        echo "<div id='topBar'><p id='topbarText'>☎️ Wir sind am ".$dateOutputString." 21-0h für dich erreichbar unter 0721-75406646</div>";
+      }
+    } else {
+       // Now check if there are scheduled services in the future or today that are bookable
+      $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
+      $stmt->execute();
+      $results = $stmt->get_result();
+      $stmt->close();
+
+      // ...and display topbar if this is the case
+      if ($results->num_rows > 0) {
+        $firstRow = $results->fetch_assoc();
+        if ($firstRow['date'] == date('Y-m-d')) {
+          echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        } else {
+          $date = new DateTime($firstRow['date']);
+          $dateOutputString = $date->format('d.m.');
+          echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        }
       }
     }
+
+    // Close sql connection
+    $sqlConnetion->close();
   ?>
 
 	<!-- <div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div> -->
