@@ -12,7 +12,6 @@ if (hash("sha256", $_GET['token']) != $tokenHash) {
 // Execute op on db
 $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 if ($_GET['op'] == "delete") {
-	echo "Deleting...";
 	$stmt = $sqlConnetion->prepare("DELETE FROM serviceDay WHERE serviceDayId = ?;");
 	$stmt->bind_param('s', $_GET['id']);
 	$stmt->execute();
@@ -21,18 +20,15 @@ if ($_GET['op'] == "delete") {
 }
 
 if ($_GET['op'] == "add") {
-	echo "Adding...";
 	$stmt = $sqlConnetion->prepare("INSERT INTO serviceDay (date) VALUES (?)");
     $stmt->bind_param('s', $_GET['date']);
     $stmt->execute();
     $stmt->close();
 }
 
-echo "Done";
-
 $sqlConnetion->close();
 
 // Redireact back
-//header("Location: serviceDays.php?token=".$_GET['token']);
+header("Location: serviceDays.php?token=".$_GET['token']);
 
 ?>
