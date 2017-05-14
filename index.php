@@ -52,6 +52,8 @@
 
 <body>
   <?php
+    include_once('/etc/apache2/db-passwords/nightline.php');
+
     // Check if there are scheduled services
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
