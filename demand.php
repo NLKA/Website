@@ -18,6 +18,7 @@ if ($_GET['origin'] == "onDemandButton") {
     $results = $stmt->get_result();
     $stmt->close();
 
+    $dateOutputString = "n/a";
     if ($results->num_rows > 0) {
         // Display that a service is available
         $firstRow = $results->fetch_assoc();
@@ -37,9 +38,9 @@ if ($_GET['origin'] == "onDemandButton") {
 	$message = 	'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! -- Nightline Bot';
 	$headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
          		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
-           		'X-Mailer: PHP/' . phpversion();
+           		'X-Mailer: PHP/'.phpversion();
 
-	mail($to, $subject, $message, $headers);
+	//mail($to, $subject, $message, $headers);
 
 	// Redirect back
 	header("Location: on-demand.html?success=1");
