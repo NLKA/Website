@@ -48,14 +48,25 @@
   	<meta name="viewport" content="width=device-width">
 
   	<link rel="stylesheet" href="css/styles.css" type="text/css"/>
-
-  	<!--[if lte IE 7]>
-  	<link rel="stylesheet" href="yaml/core/iehacks.min.css" type="text/css"/>
-  	<![endif]-->
 </head>
 
 <body>
-  <div id='topBar'><p id='topbarText'>☎️ Wir können Sonntagabend 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>
+  <?php
+    // Check if there are scheduled services
+    $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE();");
+    $stmt->execute();
+    $results = $stmt->get_result();
+    $stmt->close();
+
+    $sqlConnetion->close();
+
+    if ($results->num_rows > 0) {
+      echo "<div id='topBar'><p id='topbarText'>☎️ Wir können Sonntagabend 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+    }
+  ?>
+
 	<!-- <div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div> -->
 	
 	<header>
