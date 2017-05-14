@@ -34,7 +34,7 @@ if ($_GET['op'] == "confirm") {
     $stmt->close();
 
     // Fetch date
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE id = ?");
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE serviceDayId = ?");
     $stmt->bind_param('s', $_GET['id']);
     $stmt->execute();
     $results = $stmt->get_result();
