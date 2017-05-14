@@ -14,9 +14,53 @@
             <h2>Für Ratsuchende</h2>
             <p>Die Nightline ist ein <b>Zuhörtelefon von Studierenden für Studierende</b>. Nightlines gibt es in verschiedenen Städten und sie bieten Dir die Möglichkeit, über Dinge zu reden, die Dich gerade beschäftigen. Egal, ob du Ersti oder Doktorand/in bist, egal, ob Du ein konkretes Anliegen hast oder du einfach jemanden zum Zuhören brauchst, eine Nightline hat immer ein offenes Ohr für dich. Auch wenn du Fragen hast und nicht weißt, an wen du Dich wenden sollst, kannst Du bei uns anrufen.</p><br/>
 
-            <!-- <p>Unseren nächsten Telefondienst kannst du am <b>Donnerstag, 11. Mai, zwischen 21 und 0 Uhr</b>, wie gewohnt, unter der Telefonnummer <b>0721-75406646</b> erreichen.</p> -->
+            <?php
+                include_once('/etc/apache2/db-passwords/nightline.php');
 
-            <p>Unseren nächsten Telefondienst kannst du für <b>Sonntag, 14. Mai, zwischen 21 und 0 Uhr</b>, <a href='on-demand.html'>hier anfordern</a>.</p>
+                 // Prepare sql connection
+                $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+
+                // Check if there is a cofirmed service in the future or today
+                $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
+                $stmt->execute();
+                $results = $stmt->get_result();
+                $stmt->close();
+
+                if ($results->num_rows > 0) {
+                    // Display that a service is available
+                    $firstRow = $results->fetch_assoc();
+                    if ($firstRow['date'] == date('Y-m-d')) {
+                        echo "<p>Wir sind heute Abend 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar</p>";
+                    } else {
+                        $date = new DateTime($firstRow['date']);
+                        $dateOutputString = $date->format('d.m.');
+                        echo "<p>Wir sind am ".$dateOutputString." 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar";
+                    }
+                } else {
+                    // Now check if there are scheduled services in the future or today that are bookable
+                    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
+                    $stmt->execute();
+                    $results = $stmt->get_result();
+                    $stmt->close();
+
+                    // ...and display text if this is the case
+                    if ($results->num_rows > 0) {
+                        $firstRow = $results->fetch_assoc();
+                        if ($firstRow['date'] == date('Y-m-d')) {
+                            echo "<p>Unseren nächsten Telefondienst kannst du für <b>heute Abend</b> zwischen 21 und 0 Uhr, <a href='on-demand.html'>hier anfordern</a>.</p>";
+                        } else {
+                            $date = new DateTime($firstRow['date']);
+                            $dateOutputString = $date->format('d.m.');
+                            echo "<p>Unseren nächsten Telefondienst kannst du für den".$dateOutputString." 21-0h <a href='on-demand.html' id='anfordern'>hier anfordern</a></div>";
+                        }
+                    }
+                }
+
+                // Close sql connection
+                $sqlConnetion->close();
+            ?>
+
+            <!-- <p>Unseren nächsten Telefondienst kannst du am <b>Donnerstag, 11. Mai, zwischen 21 und 0 Uhr</b>, wie gewohnt, unter der Telefonnummer <b>0721-75406646</b> erreichen.</p> -->
 
             <!-- <p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />  -->
 
