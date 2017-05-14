@@ -54,23 +54,20 @@ if ($_GET['op'] == "confirm") {
         }
     }
 
-    echo $dateOutputString;
-    echo "try sending mail";
     // Send mail to list
-    $to      = 	'rs@robinschnaidt.com';
+    $to      =  'ka-aktive@nl2.kip.uni-heidelberg.de';
 	$subject = 	'[NL-Bot] Dienst '.$dateOutputString;
-	$message = 	'Der Telefondienst für '.$dateOutputString.' wurde eben bestätigt und findet statt. Bitte überprüfe, ob du dich eingetragen hast und spreche dich ggf. mit deinem Partner ab. Bis bald und frohes Telefonieren! -- Nightline Bot';
+	$message = 	'Der Telefondienst für '.$dateOutputString.' wurde eben nach Anfragen auf der Website bestätigt und findet statt. Bitte überprüfe, ob du dich eingetragen hast und spreche dich ggf. mit deinem Partner ab. Bis bald und frohes Telefonieren! ☎️  -- Nightline Bot';
     $headers =  'From: no-reply@nightline-karlsruhe.de'."\r\n".
                 'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
                 'X-Mailer: PHP/'.phpversion();
                 
 	mail($to, $subject, $message, $headers);
-    echo "send";
 }
 
 $sqlConnetion->close();
 
 // Redirect back
-//header("Location: serviceDays.php?token=".$_GET['token']);
+header("Location: serviceDays.php?token=".$_GET['token']);
 
 ?>
