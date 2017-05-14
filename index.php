@@ -57,7 +57,7 @@
     // Check if there are scheduled services in the future or today that are bookable
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date asc;");
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
@@ -67,10 +67,11 @@
     // ...and display topbar if the case
     if ($results->num_rows > 0) {
       $firstRow = $results->fetch_assoc();
+      echo $firstRow['date'];
       if ($firstRow['date'] == date('Y-m-d')) {
         echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
       } else {
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$firstRow['date']." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können bald 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
       }
     }
   ?>
@@ -91,8 +92,8 @@
 				<ul>
        					<?php
             					for ($k=0; $k<count($pages); $k++){
-							// Second condition removes impressum from title bar, third removes submit, last removes on-demand
-                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6){
+	                        // Second condition removes impressum from title bar, third removes submit, last removes on-demand
+                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6) {
                     						continue;
                 					}
                 					echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
@@ -106,7 +107,7 @@
 	
 	<main>
 		<?php
-                include($pages[$incId][0]);
+      include($pages[$incId][0]);
 		?>
 	</main>
 	
