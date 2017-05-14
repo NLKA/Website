@@ -21,7 +21,7 @@ $stmt->close();
 $sqlConnetion->close();
 
 // Print table
-echo "Scheduled services: <br/>";
+echo "<p>Scheduled services:</p><br/>";
 
 echo "<table>";
 while ($row = $results->fetch_assoc()) {
@@ -33,7 +33,13 @@ while ($row = $results->fetch_assoc()) {
     echo "</tr>";
 }
 echo "</table>";
+echo "<br/><p>Noting else to show</p><br/>";
 
-echo "<br/>Noting else to show";
+// Print input field
+echo "<form action='serviceDayModify.php?token=".$_GET['token']."&op=add' method='get'>";
+echo "<label>Add a date (YYYY-MM-DD):</label>";
+echo "<input type='text' name='date'>";
+echo "<input type='submit' value='submit'/>";
+echo "</form>";
 
 ?>
