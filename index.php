@@ -64,13 +64,15 @@
 
     $sqlConnetion->close();
 
-    // ...and display topbar if the case
+    // ...and display topbar if this is the case
     if ($results->num_rows > 0) {
       $firstRow = $results->fetch_assoc();
       if ($firstRow['date'] == date('Y-m-d')) {
         echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
       } else {
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können bald 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+        $date = new DateTime($firstRow['date']);
+        $dateOutputString = $date->format('d.m.');
+        echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
       }
     }
   ?>
