@@ -58,7 +58,7 @@ if ($_GET['op'] == "confirm") {
     echo "try sending mail";
     // Send mail to list
     $to      = 	'rs@robinschnaidt.com';
-	$subject = 	'[NL-Bot] Dienst '.$dateOutputString.' bestätigt';
+	$subject = 	'[NL-Bot] Dienst '.$dateOutputString;
 	// $message = 	'Der Telefondienst für '.$dateOutputString.' wurde eben bestätigt und findet statt. Bitte überprüfe, ob du dich eingetragen hast und spreche dich ggf. mit deinem Partner ab. Bis bald und frohes Telefonieren! -- Nightline Bot';
 	// $headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
  //         		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
