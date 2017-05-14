@@ -57,7 +57,7 @@
     // Check if there are scheduled services in the future or today that are bookable
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
