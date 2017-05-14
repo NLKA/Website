@@ -31,4 +31,6 @@ while ($row = $results->fetch_assoc()) {
 }
 echo "</table>";
 
+echo "<br/>Noting else to show";
+
 ?>
