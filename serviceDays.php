@@ -36,8 +36,10 @@ echo "</table>";
 echo "<br/><p>Noting else to show</p><br/>";
 
 // Print input field
-echo "<form action='serviceDayModify.php?token=".$_GET['token']."&op=add' method='get'>";
+echo "<form action='serviceDayModify.php' method='get'>";
 echo "<label>Add a date (YYYY-MM-DD):</label>";
+echo "<input type='hidden' name='token' value='".$_GET['token']."'/>";
+echo "<input type='hidden' name='op' value='add' />";
 echo "<input type='text' name='date'>";
 echo "<input type='submit' value='submit'/>";
 echo "</form>";
