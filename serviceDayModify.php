@@ -33,6 +33,6 @@ echo "Done";
 $sqlConnetion->close();
 
 // Redireact back
-header("Location: serviceDays.php?token=".$_GET['token']);
+//header("Location: serviceDays.php?token=".$_GET['token']);
 
 ?>
