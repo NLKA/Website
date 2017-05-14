@@ -32,6 +32,35 @@ if ($_GET['op'] == "confirm") {
 	$stmt->bind_param('s', $_GET['id']);
     $stmt->execute();
     $stmt->close();
+
+    // Fetch date
+    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE id = ?");
+    $stmt->bind_param('s', $_GET['id']);
+    $stmt->execute();
+    $results = $stmt->get_result();
+    $stmt->close();
+
+    $dateOutputString = "n/a";
+    if ($results->num_rows > 0) {
+        // Display that a service is available
+        $firstRow = $results->fetch_assoc();
+        if ($firstRow['date'] == date('Y-m-d')) {
+            $dateOutputString = "heute";
+        } else {
+            $date = new DateTime($firstRow['date']);
+            $dateOutputString = $date->format('d.m.');
+        }
+    }
+
+    // Send mail to list
+    $to      = 	'ka-aktive@nl2.kip.uni-heidelberg.de';
+	$subject = 	'[NL-Bot] Dienst '.$dateOutputString.' bestätigt';
+	$message = 	'Der Telefondienst für '.$dateOutputString.' wurde eben bestätigt und findet statt. Bitte überprüfe, ob du dich eingetragen hast und spreche dich ggf. mit deinem Partner ab. Bis bald und frohes Telefonieren! -- Nightline Bot';
+	$headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
+         		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
+           		'X-Mailer: PHP/'.phpversion();
+
+	mail($to, $subject, $message, $headers);
 }
 
 $sqlConnetion->close();
