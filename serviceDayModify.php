@@ -11,13 +11,6 @@ if (hash("sha256", $_GET['token']) != $tokenHash) {
 
 // Execute op on db
 $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
-if ($_GET['op'] == "delete") {
-	$stmt = $sqlConnetion->prepare("DELETE FROM serviceDay WHERE serviceDayId = ?;");
-	$stmt->bind_param('s', $_GET['id']);
-	$stmt->execute();
-	$results = $stmt->get_result();
-	$stmt->close();
-}
 
 if ($_GET['op'] == "add") {
 	$stmt = $sqlConnetion->prepare("INSERT INTO serviceDay (date, service) VALUES (?, 0)");
@@ -26,9 +19,24 @@ if ($_GET['op'] == "add") {
     $stmt->close();
 }
 
+if ($_GET['op'] == "delete") {
+	$stmt = $sqlConnetion->prepare("DELETE FROM serviceDay WHERE serviceDayId = ?;");
+	$stmt->bind_param('s', $_GET['id']);
+	$stmt->execute();
+	$results = $stmt->get_result();
+	$stmt->close();
+}
+
+if ($_GET['op'] == "confirm") {
+	$stmt = $sqlConnetion->prepare("UPDATE serviceDay SET service = 1 WHERE serviceDayId = ?");
+	$stmt->bind_param('s', $_GET['id']);
+    $stmt->execute();
+    $stmt->close();
+}
+
 $sqlConnetion->close();
 
-// Redireact back
+// Redirect back
 header("Location: serviceDays.php?token=".$_GET['token']);
 
 ?>
