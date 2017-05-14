@@ -30,11 +30,11 @@
                     // Display that a service is available
                     $firstRow = $results->fetch_assoc();
                     if ($firstRow['date'] == date('Y-m-d')) {
-                        echo "<p>Wir sind heute Abend 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar</p>";
+                        echo "<p>Wir sind <b>heute Abend</b> 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar</p>";
                     } else {
                         $date = new DateTime($firstRow['date']);
                         $dateOutputString = $date->format('d.m.');
-                        echo "<p>Wir sind am ".$dateOutputString." 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar";
+                        echo "<p>Wir sind am <b>".$dateOutputString."</b> 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar";
                     }
                 } else {
                     // Now check if there are scheduled services in the future or today that are bookable
@@ -51,7 +51,7 @@
                         } else {
                             $date = new DateTime($firstRow['date']);
                             $dateOutputString = $date->format('d.m.');
-                            echo "<p>Unseren nächsten Telefondienst kannst du für den".$dateOutputString." 21-0h <a href='on-demand.html' id='anfordern'>hier anfordern</a></div>";
+                            echo "<p>Unseren nächsten Telefondienst kannst du für den<b>".$dateOutputString."</b> 21-0h <a href='on-demand.html' id='anfordern'>hier anfordern</a></p>";
                         }
                     } else {
                         // Display that no service is scheduled
