@@ -10,7 +10,6 @@ if ($_GET['origin'] == "onDemandButton") {
 	$stmt->bind_param('s', $_SERVER['REMOTE_ADDR']);
 	$stmt->execute();
 	$stmt->close();
-	$sqlConnetion->close();
 
 	// Fetch next date
 	$stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date ASC;");
@@ -35,12 +34,12 @@ if ($_GET['origin'] == "onDemandButton") {
 	// Send mail
 	$to      = 	'ka-aktive@nl2.kip.uni-heidelberg.de';
 	$subject = 	'[NL-Bot] Dienst angefordert';
-	$message = 	'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! -- Nightline Bot';
+	$message = 	'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
 	$headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
          		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
            		'X-Mailer: PHP/'.phpversion();
 
-	//mail($to, $subject, $message, $headers);
+	mail($to, $subject, $message, $headers);
 
 	// Redirect back
 	header("Location: on-demand.html?success=1");
