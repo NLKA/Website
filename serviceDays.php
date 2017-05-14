@@ -21,7 +21,7 @@ $stmt->close();
 $sqlConnetion->close();
 
 // Print table
-echo "Scheduled services: <br/>"
+echo "Scheduled services: <br/>";
 
 echo "<table>";
 while ($row = $results->fetch_assoc()) {
