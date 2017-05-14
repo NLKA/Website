@@ -54,6 +54,7 @@ if ($_GET['op'] == "confirm") {
         }
     }
 
+    echo $dateOutputString;
     echo "try sending mail";
     // Send mail to list
     $to      = 	'rs@robinschnaidt.com';
