@@ -65,6 +65,7 @@
     $sqlConnetion->close();
 
     // ...and display topbar if the case
+    echo $results->num_rows;
     if ($results->num_rows > 0) {
       $firstRow = $results->fetch_assoc();
       if ($firstRow['date'] == date('Y-m-d')) {
