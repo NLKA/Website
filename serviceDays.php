@@ -10,7 +10,6 @@ if (hash("sha256", $_GET['token']) != $tokenHash) {
 }
 
 // Fetch table from db
-echo "Fetching from db";
 $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
 $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay;");
@@ -30,6 +29,7 @@ while ($row = $results->fetch_assoc()) {
     echo "<td>".$row['date']."</td>";
     echo "<td>".$row['service']."</td>";
     echo "<td><a href='serviceDayModify.php?token=".$_GET['token']."&op=delete&id=".$row['serviceDayId']."'>Delete</a></td>";
+    echo "<td><a href='serviceDayModify.php?token=".$_GET['token']."&op=confirm&id=".$row['serviceDayId']."'>Confirm</a></td>";
     echo "</tr>";
 }
 echo "</table>";
