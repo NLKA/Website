@@ -26,11 +26,11 @@
                     // Display that a service is available
                         $firstRow = $results->fetch_assoc();
                         if ($firstRow['date'] == date('Y-m-d')) {
-                            echo "<a id='button' class='ym-button ym-next' href='../demand.php?origin=onDemandButton'>Dienst heute Abend 21-0h anfordern</a>";
+                            echo "<a id='button' class='ym-button ym-next'>Dienst heute Abend 21-0h anfordern</a>";
                         } else {
                             $date = new DateTime($firstRow['date']);
                             $dateOutputString = $date->format('d.m.');
-                            echo "<a id='button' class='ym-button ym-next' href='../demand.php?origin=onDemandButton'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
+                            echo "<a id='button' class='ym-button ym-next'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
                         }
                     } else {
                         echo "Momentan sind keine Dienste geplant.";
@@ -72,6 +72,14 @@
                 return decodeURIComponent(results[1].replace(/\+/g, ' '));
             }
         }
+
+        $('#button').click( function () {
+            // set warning text
+            $('#button').preprend("<a>Möchtest du wirklich einen Telefondienst vereinbaren? Unsere Nightliner werden dann im Dienst sein und gerne mit dir sprechen. <b>Wenn du noch nicht sicher bist, ob du anrufen wirst, warte noch einen Moment ab</b> und fordere uns später an. <b>Wenn du sicher bist: Klicke jetzt nochmals auf den Button...</b></a>");
+            // activate link
+            $("#button").attr("href", "../demand.php?origin=onDemandButton");
+        });
+
     </script>
     <!-- Site scripts -->
 </main>
