@@ -106,6 +106,14 @@ h2, .box h2 {
 }
 
 @media only screen and (max-width: 900px) {
+	h1 {
+		font-size: 70px;
+	}
+
+	h2 {
+		font-size: 55px;
+	}
+
 	.info {
 		font-size: 29px;
 		text-align: justify;
