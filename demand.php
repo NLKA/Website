@@ -7,7 +7,7 @@ if ($_GET['origin'] == "onDemandButton") {
 	$sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
 	$stmt = $sqlConnetion->prepare("INSERT INTO onDemandEntry (ip) VALUES (?)");
-	$stmt->bind_param('s', $_SERVER['REMOTE_ADDR']);
+	$stmt->bind_param('s', hash("sha256", $_SERVER['REMOTE_ADDR']));
 	$stmt->execute();
 	$stmt->close();
 
@@ -32,7 +32,7 @@ if ($_GET['origin'] == "onDemandButton") {
     $sqlConnetion->close();
 
 	// Send mail
-	$to      = 	'ka-aktive@nl2.kip.uni-heidelberg.de';
+	$to      = 	'rs@robinschnaidt.com';
 	$subject = 	'[NL-Bot] Dienst angefordert';
 	$message = 	'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
 	$headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
