@@ -1,7 +1,4 @@
 <script src='js/jquery.js'></script>
-<script>
-    $('#topBar').hide();
-</script>
 
 <main>
 	<div class="ym-wrapper">
@@ -17,7 +14,7 @@
                     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
                     // Check if there is a cofirmed service in the future or today
-                    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date ASC;");
+                    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service == 0 ORDER BY date ASC;");
                     $stmt->execute();
                     $results = $stmt->get_result();
                     $stmt->close();
@@ -32,8 +29,10 @@
                             $dateOutputString = $date->format('d.m.');
                             echo "<a id='button' class='ym-button ym-next'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
                         }
+
+                        echo "<script>$('#topBar').hide();</script>";
                     } else {
-                        echo "Momentan sind keine Dienste geplant.";
+                        echo "Momentan sind noch keine weiteren Dienste geplant.";
                     }
         
                     // Close sql connection
