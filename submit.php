@@ -2,6 +2,12 @@
 
 include_once('/etc/apache2/db-passwords/nightline.php');
 
+// - - - - - - - - - - - - -
+// Disable submissions (!!)
+exit();
+// - - - - - - - - - - - - - 
+
+
 // Check captcha
 if (isset($_POST['g-recaptcha-response'])) {
  	$captcha = $_POST['g-recaptcha-response'];
