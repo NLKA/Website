@@ -88,6 +88,7 @@ input[type=submit], .greyButton:link, .greyButton:visited {
 	background-color: white;
 	border-radius: 12px;
 
+    min-width: 1000px;
 	max-width: 1100px;
 
 	top: 20px;
