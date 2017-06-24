@@ -2,7 +2,7 @@
 
 include_once('/etc/apache2/db-passwords/nightline.php');
 
-$allowCreateOriginAccount = true;
+$allowCreateOriginAccount = false;
 
 // MySQL db data
 $dbName = $DB_NAME;		// Name of SQL database which will be created
