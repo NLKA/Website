@@ -51,6 +51,10 @@ class User {
       throw new Exception('Keine gültige Emailadresse angegeben');
     }
 
+    if (strlen($pUser) < 2) {
+      throw new Exception('Dieser Benutzername ist nicht erlaubt');
+    }
+
     // Check if password is long enough
     if (strlen($pPassword) < 6) {
       throw new Exception('Passwort zu kurz (mindestens 6 Zeichen)');
