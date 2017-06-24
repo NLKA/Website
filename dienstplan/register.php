@@ -8,7 +8,7 @@
   <div id='content'>
     <h1>Nightline Karlsruhe - Registrieren</h1>
     <form action='createAccount.php' method='post'>
-      <a class='fieldLabel'>Benutzername (Wichtig: Andere Nightliner sollten dich unter diesem erkennen können)</a><br>
+      <a class='fieldLabel'>Benutzername (Wichtig: Andere Nightliner sollten dich unter diesem erkennen können):</a><br>
       <input type="text" name="username"><br>
       <a class='fieldLabel'>Emailadresse:</a><br>
       <input type="text" name="email"><br>
