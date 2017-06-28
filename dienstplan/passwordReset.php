@@ -23,6 +23,7 @@ if ($user) {
 
 		echo "Passwort generieren";
 		$newPassword = randomString(16);
+		echo "Passwort generiert";
 		User::changePassword($userToReset, $newPassword);
 		echo "passwort geändert";
 
