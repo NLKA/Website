@@ -53,10 +53,12 @@ if ($user) {
 	echo "Please log in first";
 }
 
-function randomString($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+function randomString($length)
 {
+    $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $max = 61;
+
     $string = '';
-    $max = mb_strlen($keyspace, '8bit') - 1;
     for ($i = 0; $i < $length; ++$i) {
         $string .= $keyspace[random_int(0, $max)];
     }
