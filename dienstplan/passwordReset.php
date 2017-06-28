@@ -29,7 +29,7 @@ if ($user) {
 
 		// Send mail to inform user about new login token
 		echo "Email fetchen";
-		$to = emailForUser($sqlConnection, $userToReset); #
+		$to = emailForUser($sqlConnection, $userToReset);
 		echo "Email gefetcht";
 		if ($to != "") {
 			$subject = 	'[NL-Bot] Passwort reset';
