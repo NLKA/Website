@@ -22,7 +22,7 @@ if ($user) {
 		// Generate random string
 
 		echo "Passwort generieren";
-		$newPassword = openssl_random_pseudo_bytes(16);
+		$newPassword = join('-', str_split(bin2hex(openssl_random_pseudo_bytes(40)), 4));
 		echo "Passwort generiert";
 		User::changePassword($userToReset, $newPassword);
 		echo "passwort geändert";
