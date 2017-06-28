@@ -20,11 +20,16 @@ if ($user) {
 	$activate = $_GET['activate'];
 	if (checkUsernameExists($sqlConnection, $userToReset)) {
 		// Generate random string
+
+		echo "Passwort generieren";
 		$newPassword = randomString(16);
 		User::changePassword($userToReset, $newPassword);
+		echo "passwort geändert";
 
 		// Send mail to inform user about new login token
-		$to = emailForUser($sqlConnection, $userToReset); 
+		echo "Email fetchen";
+		$to = emailForUser($sqlConnection, $userToReset); #
+		echo "Email gefetcht";
 		if ($to != "") {
 			$subject = 	'[NL-Bot] Passwort reset';
 			$message = 	'Hallo, eben wurde dein Nightline-Passwort zurückgesetzt. Du kannst dich nun mit folgendem Passwort unter nightline-karlsruhe.de/dienstplan/ anmelden: '.$newPassword.'Wichtg: Unmittelbar unter Einstelungen das neues anderes Passwort festlegen!  -- Nightline Bot';
@@ -33,11 +38,11 @@ if ($user) {
                 		'X-Mailer: PHP/'.phpversion();
                 
 			mail($to, $subject, $message, $headers);
+			echo "Passwort wurde zurückgesetzt und der Benutzer per Email informiert";
 		} else {
 			echo "No email known";
 		}
 
-		echo "Passwort wurde zurückgesetzt und der Benutzer per Email informiert";
  		// Redirect if requested
 		// header('Location: home.php');
 	} else {
