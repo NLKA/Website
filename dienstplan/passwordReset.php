@@ -38,7 +38,7 @@ if ($user) {
                 		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
                 		'X-Mailer: PHP/'.phpversion();
                 
-			mail($to, $subject, $message, $headers);
+			mail(utf8_decode($to), utf8_decode($subject), utf8_decode($message), $headers);
 			echo "Passwort wurde zurückgesetzt und der Benutzer per Email informiert";
 		} else {
 			echo "No email known";
@@ -52,17 +52,5 @@ if ($user) {
 } else {
 	echo "Please log in first";
 }
-
-// function randomString($length)
-// {
-//     $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//     $max = 61;
-
-//     $string = '';
-//     for ($i = 0; $i < $length; ++$i) {
-//         $string .= $keyspace[random_int(0, $max)];
-//     }
-//     return $string;
-// }
 
 ?>
