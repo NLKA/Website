@@ -22,7 +22,7 @@ if ($user) {
 		// Generate random string
 
 		echo "Passwort generieren";
-		$newPassword = randomString(16);
+		$newPassword = openssl_random_pseudo_bytes(16);
 		echo "Passwort generiert";
 		User::changePassword($userToReset, $newPassword);
 		echo "passwort geändert";
@@ -53,16 +53,16 @@ if ($user) {
 	echo "Please log in first";
 }
 
-function randomString($length)
-{
-    $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $max = 61;
+// function randomString($length)
+// {
+//     $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//     $max = 61;
 
-    $string = '';
-    for ($i = 0; $i < $length; ++$i) {
-        $string .= $keyspace[random_int(0, $max)];
-    }
-    return $string;
-}
+//     $string = '';
+//     for ($i = 0; $i < $length; ++$i) {
+//         $string .= $keyspace[random_int(0, $max)];
+//     }
+//     return $string;
+// }
 
 ?>
