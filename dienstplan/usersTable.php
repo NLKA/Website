@@ -28,10 +28,11 @@ function buildUsersTable($pUser) {
             echo "<td>Benutzer <a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=1'>Zu Admin machen</a></td>";
         }
     	if ($row['activated']) {
-    		echo "<td><a>Aktiviert</a> <a class='redButton' href='activateAccount.php?user=".$row['user']."&activate=0'>Sperren</a></td>";
+    		echo "<td><a>Aktiviert</a> <a class='redButton' href='activateAccount.php?user=".$row['user']."&activate=0'>Sperren</a>";
     	} else {
-    		echo "<td><a>Nicht aktiviert</a> <a class='greenButton' href='activateAccount.php?user=".$row['user']."&activate=1'>Aktivieren</a></td>";
+    		echo "<td><a>Nicht aktiviert</a> <a class='greenButton' href='activateAccount.php?user=".$row['user']."&activate=1'>Aktivieren</a>";
     	}
+        echo "<br/><br/><a class='yellowButton' href='passwordReset.php?user=".$row['user']."'>Passwort zurücksetzen</a></td>";
 		echo "</tr>";
 	}
 	echo "</table>";

@@ -7,9 +7,8 @@ require_once('footer.php');
 
 session_start();
 
-// Check if user is still logged in
+// Check if user is still logged in	
 $user = User::loginSession();
-
 
 //enable redirecting
 $_SESSION['redirect'] = 'home.php';
