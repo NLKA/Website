@@ -12,12 +12,12 @@ if ($user) {
 	$sqlConnection = User::connect();
 
 	if ($_GET['type'] == "email") {
-		User::changeEmail($user->user, $_POST['value']);
+		User::changeEmail($user->user, htmlspecialchars($_POST['value']));
 		header('Location: accountSettings.php');
 	}
 
 	if ($_GET['type'] == "password") {
-		User::changePassword($user->user, $_POST['value']);
+		User::changePassword($user->user, htmlspecialchars($_POST['value']));
 		header('Location: logoutAccount.php');
 	}
 } else {
