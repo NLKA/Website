@@ -26,7 +26,7 @@ function buildUsersTable($pUser) {
             echo "</td>";
             
             echo "<td>";
-                echo $row['email'];
+                echo "<p>".$row['email']."</p>";
                 echo "<p><a class='yellowButton' href='passwordReset.php?user=".$row['user']."'>Passwort zurücksetzen</a></p>";
             echo "</td>";
 
