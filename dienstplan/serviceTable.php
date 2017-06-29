@@ -127,7 +127,6 @@ function buildServiceTable($pUser) {
         $resultsUsers = $stmt->get_result();
         $stmt->close();
 
-        $selfHasEntry = false;
         $isFirst = true;
         while ($rowUser = $resultsUsers->fetch_assoc()) {
             if (!$isFirst) {
@@ -137,11 +136,16 @@ function buildServiceTable($pUser) {
             }
 
             echo $rowUser['user'];
-
-            if ($rowUser['user'] == $pUser->user) {
-                $selfHasEntry = true;
-            }
         }
+
+        if ($pUser->isPrivileged) {
+            if (!$isFirst) {
+                echo "<br/><br/>";
+            }
+            echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";
+        }
+        echo "</td>";
+
         echo "</tr>";
     }
     echo "</table>";
