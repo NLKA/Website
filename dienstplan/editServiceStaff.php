@@ -55,7 +55,7 @@ $stmt->close();
 
 $selfHasEntry = false;
 while ($rowUser = $resultsUsers->fetch_assoc()) {
-    echo "<p>".$rowUser['user']."<a class='greenButton' href='serviceStaffModify.php?op=add&id=".$_GET[id]."&user=".$rowUser['user']."'>Hinzufügen</a></p>";
+    echo "<p>".$rowUser['user']." <a class='greenButton' href='serviceStaffModify.php?op=add&id=".$_GET[id]."&user=".$rowUser['user']."'>Hinzufügen</a></p>";
 }
 
 ?>

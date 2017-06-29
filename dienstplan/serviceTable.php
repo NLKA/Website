@@ -46,7 +46,7 @@ function buildServiceTable($pUser) {
                 }
             echo "</td>";
 
-    	// load entries for this service day
+    	   // load entries for this service day
             echo "<td>";
                 $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
                 $stmt->bind_param('i', $row['serviceDayId']);
@@ -95,7 +95,7 @@ function buildServiceTable($pUser) {
 	echo "<form action='serviceDayModify.php' method='get'>";
 	   echo "<label>Neuen Diensttermin anlegen (YYYY-MM-DD): </label>";
 	   echo "<input type='hidden' name='op' value='add' />";
-	   echo "<input type='text' name='date' placeholder='z.B. 2017-06-30'>";
+	   echo "<input type='text' name='date' placeholder='z.B. 2017-06-30'> ";
 	   echo "<input type='submit' value='Anlegen'/>";
 	echo "</form>";
 
