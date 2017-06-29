@@ -71,7 +71,7 @@ function buildServiceTable($pUser) {
                     }
                 }
                 if (!$isFirst) {
-                    echo "<p>";
+                    echo "</p>";
                 }
 
                 echo "<p>";
@@ -138,17 +138,19 @@ function buildServiceTable($pUser) {
                 if (!$isFirst) {
                     echo ", ";
                 } else {
+                    echo "<p>";
                     $isFirst = false;
                 }
 
                 echo $rowUser['user'];
             }
 
+            if (!$isFirst) {
+                echo "</p>";
+            }
+
             if ($pUser->isPrivileged) {
-                if (!$isFirst) {
-                    echo "<br/><br/>";
-                }
-                echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";
+                echo "<p><a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a></p>";
             }
             echo "</td>";
         echo "</tr>";
