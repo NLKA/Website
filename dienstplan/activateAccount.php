@@ -25,6 +25,18 @@ if ($user) {
     	$stmt->execute();
     	$stmt->close();
 
+    	// Send mail
+    	$to = emailForUser($sqlConnection, $userToActivate);
+		if ($to != "") {
+			$subject = 	'[NL-Bot] Account freigeschaltet';
+			$message = 	'Hallo, eben wurde dein Nightline-Account freigeschaltet. Du kannst dich nun unter nightline-karlsruhe.de/dienstplan/ anmelden.  -- Nightline Bot';
+    		$headers =  'From: no-reply@nightline-karlsruhe.de'."\r\n".
+                		'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
+                		'X-Mailer: PHP/'.phpversion();
+                
+			mail(utf8_decode($to), utf8_decode($subject), utf8_decode($message), $headers);
+		}
+
  		// Redirect if requested
 		header('Location: home.php');
 	} else {
