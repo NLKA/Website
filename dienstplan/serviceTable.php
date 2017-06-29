@@ -98,9 +98,13 @@ function buildServiceTable($pUser) {
 	echo "<form action='serviceDayModify.php' method='get'>";
 	   echo "<label>Neuen Diensttermin anlegen (YYYY-MM-DD): </label>";
 	   echo "<input type='hidden' name='op' value='add' />";
-	   echo "<input type='text' name='date' placeholder='z.B. 2017-06-30'> ";
+	   echo "<input type='text' id='datepicker' name='date'> ";
 	   echo "<input type='submit' value='Anlegen'/>";
 	echo "</form>";
+
+    echo "<script src='js/jquery-ui/external/jquery/jquery.js'></script>";
+    echo "<script src='js/jquery-ui/jquery-ui.min.js'></script>";
+    echo "<script>$(function() { $('#datepicker').datepicker({dateFormat:'yy-mm-dd'}); });</script>";
 
     // Build history
     echo "<h2>Vergangene Dienste</h2>";
