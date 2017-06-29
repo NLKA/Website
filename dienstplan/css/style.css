@@ -15,7 +15,7 @@ input {
 }
 
 input[type=submit], .greyButton:link, .greyButton:visited {
-    padding: 4px 15px;
+    padding: 6px 10px;
 
     margin-top: 15px;
     margin-bottom: 20px;
@@ -32,9 +32,7 @@ input[type=submit], .greyButton:link, .greyButton:visited {
 }
 
 .greenButton:link, .greenButton:visited {
-	padding: 4px 15px;
-
-    margin-left: 10px;
+    padding: 6px 10px;
 
     background-color: #04de41;
     
@@ -48,9 +46,7 @@ input[type=submit], .greyButton:link, .greyButton:visited {
 }
 
 .yellowButton:link, .yellowButton:visited {
-	padding: 4px 15px;
-
-    margin-left: 10px;
+    padding: 6px 10px;
 
     background-color: #ffd132;
     
@@ -64,12 +60,10 @@ input[type=submit], .greyButton:link, .greyButton:visited {
 }
 
 .redButton:link, .redButton:visited {
-	padding: 4px 15px;
-
-    margin-left: 10px;
+    padding: 6px 10px;
 
     background-color: #fe4e31;
-    
+
     color: white;
     text-decoration: none;
 
@@ -99,6 +93,7 @@ input[type=submit], .greyButton:link, .greyButton:visited {
 
 table {
 	border-collapse: collapse;
+    width: 100%;
 }
 
 table, th, td {
