@@ -11,6 +11,9 @@ function buildServiceTable($pUser) {
 
 	// // Buid service days table
 	echo "<h2>Aktueller Dienstplan</h2>";
+    if ($pUser->isPrivileged && $_GET['editServices'] == 0) {
+        echo "<p><a class='greyButton' href='home.php?editServices=1'>Dienste bearbeiten</a></p>";
+    }
 
 	// Fetch table from db
 	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
@@ -24,7 +27,7 @@ function buildServiceTable($pUser) {
 		echo "<tr>";
             echo "<td>";
                 echo "<p>".$row['date']." (".date("D", strtotime($row['date'])).") "; 
-                if ($pUser->isPrivileged) {
+                if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
                     echo "<a class='redButton' href='serviceDayModify.php?op=delete&id=".$row['serviceDayId']."'>Löschen</a>";    		
                 }
                 echo "</p>";
@@ -101,6 +104,9 @@ function buildServiceTable($pUser) {
 
     // Build history
     echo "<h2>Vergangene Dienste</h2>";
+    if ($pUser->isPrivileged && $_GET['editServices'] == 0) {
+        echo "<p><a class='greyButton' href='home.php?editServices=1'>Historie bearbeiten</a></p>";
+    }
 
     $results = $sqlConnetion->query("SELECT * FROM serviceDay WHERE date < CURDATE() ORDER BY date desc;");
 
@@ -111,7 +117,7 @@ function buildServiceTable($pUser) {
     while ($row = $results->fetch_assoc()) {
         echo "<tr>";
             echo "<td>".$row['date']." (".date("D", strtotime($row['date'])).")";
-            if ($pUser->isPrivileged) {
+            if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
                 echo " <a class='redButton' href='serviceDayModify.php?op=delete&id=".$row['serviceDayId']."'>Löschen</a>";
             
             }

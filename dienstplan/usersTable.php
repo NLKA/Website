@@ -8,7 +8,10 @@ function buildUsersTable($pUser) {
 	}
 
 	// Build admin page
-	echo "<h2>Benutzerverwaltung</h2>";
+	echo "<h2 id='users'>Benutzerverwaltung</h2>";
+    if ($_GET['editUsers'] == 0) {
+        echo "<p><a class='greyButton' href='home.php?editUsers=1#users'>Benutzer bearbeiten</a></p>";
+    }
 
 	$sqlConnetion = User::connect();
     $stmt = $sqlConnetion->prepare("SELECT * FROM user");
@@ -22,7 +25,9 @@ function buildUsersTable($pUser) {
     	echo "<tr>";
             echo "<td>";
                 echo "<p>".$row['user']."</p>";
-                echo "<p><a class='redButton' href='deleteAccount.php?user=".$row['user']."'>Löschen</a></p>";
+                if ($_GET['editUsers'] == 1) {
+                    echo "<p><a class='redButton' href='deleteAccount.php?user=".$row['user']."'>Löschen</a></p>";
+                }
             echo "</td>";
             
             echo "<td>";
@@ -33,12 +38,16 @@ function buildUsersTable($pUser) {
             if ($row['isPrivileged']) {
                 echo "<td>";
                     echo "<p>Admin</p>";
-                    echo "<p><a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=0'>Zu normalem User machen</a></p>";
+                    if ($_GET['editUsers'] == 1) {
+                        echo "<p><a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=0'>Zu normalem User machen</a></p>";
+                    }
                 echo "</td>";
             } else {
                 echo "<td>";
                     echo "<p>Benutzer</p>";
-                    echo "<p><a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=1'>Zu Admin machen</a></p>";
+                    if ($_GET['editUsers'] == 1) {
+                        echo "<p><a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=1'>Zu Admin machen</a></p>";
+                    }
                 echo "</td>";
             }
     	if ($row['activated']) {
