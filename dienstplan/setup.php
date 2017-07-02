@@ -22,6 +22,14 @@ $queryServiceDayStaff = "CREATE TABLE IF NOT EXISTS `serviceDayStaff` (
                 PRIMARY KEY (`serviceDayId`, `user`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$queryOperationsLog = "CREATE TABLE IF NOT EXISTS `operationsLog` (
+                `logEntryId` INT NOT NULL AUTO_INCREMENT,
+                `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `user` varchar(20) NOT NULL,
+                `action` TEXT NOT NULL,
+                PRIMARY KEY (`logEntryId`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
 // Connect to db server
 $connection = new mysqli($dbServer, $dbUser, $dbPassword);
 if ($connection->connect_errno) {
@@ -35,6 +43,7 @@ echo "Created db".$dbName."<br/>";
 $connection->select_db($dbName);
 $connection->query($queryUserTable);
 $connection->query($queryServiceDayStaff);
+$connection->query($queryOperationsLog);
 echo "Created tables<br/>";
 
 // Check if there are accounts and create origin otherwise
