@@ -53,7 +53,7 @@
 <body>
   <?php
     include_once('/etc/apache2/db-passwords/nightline.php');
-    require_once('serviceDayFetch.php');
+    require_once('dienstplan/serviceDayFetch.php');
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
