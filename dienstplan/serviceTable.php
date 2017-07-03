@@ -55,9 +55,9 @@ function buildServiceTable($pUser) {
                         echo "<p>Ausstehend ";
                     } else {
                         if ($oneMissing) {
-                            echo "<p>Keine Nightliner "; 
-                        } else {
                             echo "<p>Zu wenige Nightliner "; 
+                        } else {
+                            echo "<p>Keine Nightliner "; 
                         }
                     }
 
