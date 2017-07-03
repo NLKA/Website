@@ -41,7 +41,21 @@ function buildServiceTable($pUser) {
                     }
                     echo "</p>";
                 } else {
-                    echo "<p>Ausstehend ";
+                    // Check if at least two nightliners are available
+
+                    $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
+                    $stmt->bind_param('i', $row['serviceDayId']);
+                    $stmt->execute();
+                    $resultsUsers = $stmt->get_result();
+                    $stmt->close();
+
+                    $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+                    if ($serviceStaffAvailable) {
+                        echo "<p>Ausstehend ";
+                    } else {
+                        echo "<p>Noch kein Personal";
+                    }
+
                     if ($pUser->isPrivileged) {
                         echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";		
                     }
