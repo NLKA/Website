@@ -53,6 +53,7 @@
 <body>
   <?php
     include_once('/etc/apache2/db-passwords/nightline.php');
+    require_once('serviceDayFetch.php');
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
@@ -86,13 +87,7 @@
         $firstRow = $results->fetch_assoc();
 
         // check if two service staff members are present
-        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
-        $stmt->bind_param('i', $firstRow['serviceDayId']);
-        $stmt->execute();
-        $resultsUsers = $stmt->get_result();
-        $stmt->close();
-
-        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+        $serviceStaffAvailable = serviceStaffCountForService($firstRow['serviceDayId']) >= 2;
         if ($serviceStaffAvailable) {
           if ($firstRow['date'] == date('Y-m-d')) {
             echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
