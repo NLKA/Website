@@ -50,10 +50,15 @@ function buildServiceTable($pUser) {
                     $stmt->close();
 
                     $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+                    $oneMissing = $resultsUsers->num_rows == 1;
                     if ($serviceStaffAvailable) {
                         echo "<p>Ausstehend ";
                     } else {
-                        echo "<p>Noch kein Personal";
+                        if ($oneMissing) {
+                            echo "<p>Keine Nightliner "; 
+                        } else {
+                            echo "<p>Zu wenige Nightliner "; 
+                        }
                     }
 
                     if ($pUser->isPrivileged) {
