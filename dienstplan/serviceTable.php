@@ -53,16 +53,15 @@ function buildServiceTable($pUser) {
                     $oneMissing = $resultsUsers->num_rows == 1;
                     if ($serviceStaffAvailable) {
                         echo "<p>Ausstehend ";
+                        if ($pUser->isPrivileged) {
+                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
+                        }
                     } else {
                         if ($oneMissing) {
                             echo "<p>Zu wenige Nightliner "; 
                         } else {
                             echo "<p>Keine Nightliner "; 
                         }
-                    }
-
-                    if ($pUser->isPrivileged) {
-                        echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";		
                     }
                     echo "</p>";
                 }
