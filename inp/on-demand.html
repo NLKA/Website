@@ -32,8 +32,8 @@
                         $stmt->close();
 
                         $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-                            if ($serviceStaffAvailable) {
-                                if ($firstRow['date'] == date('Y-m-d')) {
+                        if ($serviceStaffAvailable) {
+                            if ($firstRow['date'] == date('Y-m-d')) {
                                 echo "<a id='button' class='ym-button ym-next'>Dienst heute Abend 21-0h anfordern</a>";
                             } else {
                                 $date = new DateTime($firstRow['date']);
@@ -41,6 +41,8 @@
                                 echo "<a id='button' class='ym-button ym-next'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
                                 echo "<script>$('#topBar').hide();</script>";
                             }
+                        } else {
+                            echo "Momentan sind noch keine weiteren Dienste geplant.";
                         }
                     } else {
                         echo "Momentan sind noch keine weiteren Dienste geplant.";
