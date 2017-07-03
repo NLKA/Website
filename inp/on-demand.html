@@ -19,18 +19,29 @@
                     $results = $stmt->get_result();
                     $stmt->close();
 
-                    if ($results->num_rows > 0) {
-                    // Display that a service is available
+                    // Display if a service is available
+                    $onDemandDayAvialable = $results->num_rows > 0;
+                    if ($onDemandDayAvialable) {
                         $firstRow = $results->fetch_assoc();
-                        if ($firstRow['date'] == date('Y-m-d')) {
-                            echo "<a id='button' class='ym-button ym-next'>Dienst heute Abend 21-0h anfordern</a>";
-                        } else {
-                            $date = new DateTime($firstRow['date']);
-                            $dateOutputString = $date->format('d.m.');
-                            echo "<a id='button' class='ym-button ym-next'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
-                        }
 
-                        echo "<script>$('#topBar').hide();</script>";
+                        // check if two service staff members are present
+                        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
+                        $stmt->bind_param('i', $firstRow['serviceDayId']);
+                        $stmt->execute();
+                        $resultsUsers = $stmt->get_result();
+                        $stmt->close();
+
+                        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+                            if ($serviceStaffAvailable) {
+                                if ($firstRow['date'] == date('Y-m-d')) {
+                                echo "<a id='button' class='ym-button ym-next'>Dienst heute Abend 21-0h anfordern</a>";
+                            } else {
+                                $date = new DateTime($firstRow['date']);
+                                $dateOutputString = $date->format('d.m.');
+                                echo "<a id='button' class='ym-button ym-next'>Dienst am ".$dateOutputString." 21-0h anfordern</a>";
+                                echo "<script>$('#topBar').hide();</script>";
+                            }
+                        }
                     } else {
                         echo "Momentan sind noch keine weiteren Dienste geplant.";
                     }
