@@ -64,7 +64,7 @@
     $stmt->close();
 
     if ($results->num_rows > 0) {
-      // Display that a service is available
+      // Display that a sure service is available
       $firstRow = $results->fetch_assoc();
       if ($firstRow['date'] == date('Y-m-d')) {
         echo "<div id='topBar'><p id='topbarText'>☎️ Wir sind heute 21-0h für dich erreichbar unter 0721-75406646</div>";
@@ -81,14 +81,26 @@
       $stmt->close();
 
       // ...and display topbar if this is the case
-      if ($results->num_rows > 0) {
+      $hasOnDemandServiceDays = $results->num_rows > 0;
+      if ($hasOnDemandServiceDays) {
         $firstRow = $results->fetch_assoc();
-        if ($firstRow['date'] == date('Y-m-d')) {
-          echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
-        } else {
-          $date = new DateTime($firstRow['date']);
-          $dateOutputString = $date->format('d.m.');
-          echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+
+        // check if two service staff members are present
+        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
+        $stmt->bind_param('i', $firstRow['serviceDayId']);
+        $stmt->execute();
+        $resultsUsers = $stmt->get_result();
+        $stmt->close();
+
+        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+        if ($serviceStaffAvailable) {
+          if ($firstRow['date'] == date('Y-m-d')) {
+            echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+          } else {
+            $date = new DateTime($firstRow['date']);
+            $dateOutputString = $date->format('d.m.');
+            echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
+          }
         }
       }
     }
