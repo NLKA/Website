@@ -60,11 +60,13 @@
                                 $dateOutputString = $date->format('d.m.');
                                 echo "<p>Unseren nächsten Telefondienst kannst du für den<b> ".$dateOutputString."</b> 21-0h <a href='on-demand.html' id='anfordern'>hier anfordern.</a></p>";
                             }
+                        } else {
+                            // Display that no service is scheduled
+                            echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />";
                         }
                     } else {
                         // Display that no service is scheduled
                         echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />";
-
                     }
                 }
 
