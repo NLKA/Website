@@ -23,6 +23,7 @@ function buildServiceTable($pUser) {
 	echo "<table border='1' style='width: 100%;'>";
 	echo "<tr><th>Datum</th><th>Findet statt</th><th>Nightliner</th></tr>";
 
+    $rowCount = 0;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
             echo "<td>";
@@ -42,7 +43,6 @@ function buildServiceTable($pUser) {
                     echo "</p>";
                 } else {
                     // Check if at least two nightliners are available
-
                     $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
                     $stmt->bind_param('i', $row['serviceDayId']);
                     $stmt->execute();
@@ -53,6 +53,11 @@ function buildServiceTable($pUser) {
                     $oneMissing = $resultsUsers->num_rows == 1;
                     if ($serviceStaffAvailable) {
                         echo "<p>Ausstehend ";
+
+                        if ($rowCount == 0) {
+                            echo "</p><p><b>Aktiv in On-Demand</b></p><p>";
+                        }
+
                         if ($pUser->isPrivileged) {
                             echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
                         }
@@ -108,6 +113,8 @@ function buildServiceTable($pUser) {
                 echo "</p>";
             echo "</td>";
         echo "</tr>";
+
+        $rowCount++;
 	}
 	echo "</table>";
 
