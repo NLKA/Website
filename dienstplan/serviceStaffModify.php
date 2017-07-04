@@ -24,7 +24,7 @@ if ($_GET['op'] == "add") {
     $stmt->close();
 
     // log action
-    logAction($user, "[Service] Add entry for ".$_GET['user']." at service no".$_GET['id']);
+    logAction($user, "[Service] Add entry for ".$_GET['user']." at service #".$_GET['id']);
 }
 
 if ($user->isPrivileged || $user->user == $_GET['user']) {
@@ -33,10 +33,10 @@ if ($user->isPrivileged || $user->user == $_GET['user']) {
         $stmt->bind_param('is', $_GET['id'], $_GET['user']);
         $stmt->execute();
         $stmt->close();
-    }
 
-    // log action
-    logAction($user, "[Service] Remove entry for ".$_GET['user']." at service no".$_GET['id']);
+        // log action
+        logAction($user, "[Service] Remove entry for ".$_GET['user']." at service #".$_GET['id']);
+    }
 }
 
 $sqlConnetion->close();
