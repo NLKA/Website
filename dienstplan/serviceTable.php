@@ -36,7 +36,7 @@ function buildServiceTable($pUser) {
 
             echo "<td>";
                 if ($row['service']) {
-                    echo "<p>Ja ";
+                    echo "<p>✅ Ja ";
                     if ($pUser->isPrivileged) {
                         echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
                     }
@@ -52,19 +52,19 @@ function buildServiceTable($pUser) {
                     $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
                     $oneMissing = $resultsUsers->num_rows == 1;
                     if ($serviceStaffAvailable) {
-                        echo "<p>Ausstehend ";
+                        echo "<p>⏳ Ausstehend ";
                         if ($pUser->isPrivileged) {
                             echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
                         }
 
                         if ($rowCount == 0) {
-                            echo "<p><b>Aktiv in On-Demand</b></p>";
+                            echo "<p><b>🚨 Aktiv in On-Demand</b></p>";
                         }
                     } else {
                         if ($oneMissing) {
-                            echo "<p>Zu wenige Nightliner "; 
+                            echo "<p>❌👤 Zu wenige Nightliner "; 
                         } else {
-                            echo "<p>Keine Nightliner "; 
+                            echo "<p>❌👥 Keine Nightliner "; 
                         }
                     }
                     echo "</p>";
@@ -153,9 +153,9 @@ function buildServiceTable($pUser) {
 
         echo "<td>";
             if ($row['service']) {
-                echo "Ja";
+                echo "✅ Ja";
             } else {
-                echo "Nein";
+                echo "🚫 Nein";
             }
         echo "</td>";
 
