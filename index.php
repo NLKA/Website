@@ -52,11 +52,10 @@
 
 <body>
   <?php
-    include_once('/etc/apache2/db-passwords/nightline.php');
-    require_once('dienstplan/serviceDayFetch.php');
+    require_once('dienstplan/config.php');
 
     // Prepare sql connection
-    $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+    $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
     // Check if there is a cofirmed service in the future or today
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
@@ -77,7 +76,7 @@
       }
     } else {
        // Now check if there are scheduled services in the future or today that are bookable
-      $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 0 ORDER BY date ASC;");
+      $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
       $stmt->execute();
       $results = $stmt->get_result();
       $stmt->close();
