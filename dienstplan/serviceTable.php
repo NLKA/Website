@@ -23,6 +23,7 @@ function buildServiceTable($pUser) {
 	echo "<table border='1' style='width: 100%;'>";
 	echo "<tr><th>Datum</th><th>Findet statt</th><th>Nightliner</th></tr>";
 
+    $noConfirmedService = true;
     $rowCount = 0;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
@@ -36,6 +37,7 @@ function buildServiceTable($pUser) {
 
             echo "<td>";
                 if ($row['service']) {
+                    $noConfirmedService = false;
                     echo "<p>✅ Ja ";
                     if ($pUser->isPrivileged) {
                         echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
@@ -57,9 +59,9 @@ function buildServiceTable($pUser) {
                             echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
                         }
 
-                        $firstRowInOnDemand = $rowCount == 0 && (int)date('H:i') < 16;
-                        $secondRowInOnDemand = $rowCount == 1 && (int)date('H:i') >= 16;
-                        if ($firstRowInOnDemand || $secondRowInOnDemand) {
+                        $firstRowInOnDemand = $rowCount == 0 && (int)date('H') < 16 && date('Y-m-d') == $row['date'];
+                        $secondRowInOnDemand = $rowCount == 1 && (int)date('H') >= 16 && date('Y-m-d') != $row['date'];
+                        if ($noConfirmedService && ($firstRowInOnDemand || $secondRowInOnDemand)) {
                             echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                         }
                     } else {
