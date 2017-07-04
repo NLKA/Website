@@ -25,6 +25,7 @@ function buildServiceTable($pUser) {
 
     $noConfirmedService = true;
     $rowCount = 0;
+    $firstRowInOnDemand = false;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
             echo "<td>";
@@ -59,9 +60,10 @@ function buildServiceTable($pUser) {
                             echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
                         }
 
-                        $firstRowInOnDemand = $rowCount == 0 && ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
-                        $secondRowInOnDemand = $rowCount == 1 && !$firstRowInOnDemand;
-                        if ($noConfirmedService && ($firstRowInOnDemand || $secondRowInOnDemand)) {
+                        if ($rowCount == 0) {
+                            $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
+                        }
+                        if ($noConfirmedService && ($firstRowInOnDemand && $rowCount == 0 || !$firstRowInOnDemand && $rowCount == 1)) {
                             echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                         }
                     } else {
