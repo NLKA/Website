@@ -58,11 +58,11 @@ function buildServiceTable($pUser) {
                         }
 
                         if ($rowCount == 0) {
-                            echo "<p><b>🚨 Aktiv in On-Demand</b></p>";
+                            echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                         }
                     } else {
                         if ($oneMissing) {
-                            echo "<p>❌👤 Zu wenige Nightliner "; 
+                            echo "<p>⚠️👤 Zu wenige Nightliner "; 
                         } else {
                             echo "<p>❌👥 Keine Nightliner "; 
                         }
