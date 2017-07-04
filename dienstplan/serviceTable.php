@@ -57,7 +57,9 @@ function buildServiceTable($pUser) {
                             echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
                         }
 
-                        if ($rowCount == 0) {
+                        $firstRowInOnDemand = $rowCount == 0 && (int)date('H:i') < 16;
+                        $secondRowInOnDemand = $rowCount == 1 && (int)date('H:i') >= 16;
+                        if ($firstRowInOnDemand || $secondRowInOnDemand) {
                             echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                         }
                     } else {
