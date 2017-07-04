@@ -58,7 +58,7 @@ function buildServiceTable($pUser) {
                         }
 
                         if ($rowCount == 0) {
-                            echo "<p><b>🚀 Aktiv in On-Demand (bis 16:00)</b></p>";
+                            echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                         }
                     } else {
                         if ($oneMissing) {
