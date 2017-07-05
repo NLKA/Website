@@ -74,6 +74,22 @@ function buildServiceTable($pUser) {
                         }
                     }
                     echo "</p>";
+
+                    // Display number of requests
+                    $stmtRequests = $sqlConnetion->prepare("SELECT COUNT(*) AS count FROM onDemandEntry WHERE serviceDayId = ?;");
+                    $stmtRequests->bind_param('i', $row['serviceDayId']);
+                    $stmtRequests->execute();
+                    $resultsRequests = $stmtRequests->get_result();
+                    $stmtRequests->close();
+
+                    $requestsRow = $resultsRequests->fetch_assoc();
+                    echo "<p>";
+                        if ($requestsRow['count'] == 0) {
+                            echo "Keine Anfragen";
+                        } else {
+                            echo "Aktuelle Anfragen: ".$requestsRow['count'];
+                        }
+                    echo "</p>";
                 }
             echo "</td>";
 
@@ -163,6 +179,22 @@ function buildServiceTable($pUser) {
             } else {
                 echo "🚫 Nein";
             }
+
+            // Display number of requests
+            $stmtRequests = $sqlConnetion->prepare("SELECT COUNT(*) AS count FROM onDemandEntry WHERE serviceDayId = ?;");
+            $stmtRequests->bind_param('i', $row['serviceDayId']);
+            $stmtRequests->execute();
+            $resultsRequests = $stmtRequests->get_result();
+            $stmtRequests->close();
+
+            $requestsRow = $resultsRequests->fetch_assoc();
+            echo "<p>";
+                if ($requestsRow['count'] == 0) {
+                    echo "Keine Anfragen";
+                } else {
+                    echo "Aktuelle Anfragen: ".$requestsRow['count'];
+                }
+            echo "</p>";
         echo "</td>";
 
         // load entries for this service day
