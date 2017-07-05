@@ -42,12 +42,15 @@ if ($_GET['origin'] == "onDemandButton") {
 
 		// Redirect back
 		header("Location: on-demand.html?success=1");
+    } else {
+        // Redirect back
+        header("Location: on-demand.html");
     }
 
     $sqlConnetion->close();
-} 
-
-// Redirect back
-header("Location: on-demand.html");
+} else {
+    // Redirect back
+    header("Location: on-demand.html");  
+}
 
 ?>
