@@ -10,6 +10,7 @@ $queryTable = "CREATE TABLE IF NOT EXISTS `onDemandEntry` (
 					`demandId` INT NOT NULL AUTO_INCREMENT,
 					`time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					`ip` varchar(45),
+					`serviceDayId` INT NOT NULL,
 					PRIMARY KEY (demandId)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
