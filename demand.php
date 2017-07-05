@@ -1,9 +1,9 @@
 <?php
 
-include_once('/etc/apache2/db-passwords/nightline.php');
+require_once('dienstplan/config.php');
 
 if ($_GET['origin'] == "onDemandButton") {
-	$sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
 	// Fetch next date
 	$stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date ASC;");
@@ -11,9 +11,10 @@ if ($_GET['origin'] == "onDemandButton") {
     $results = $stmt->get_result();
     $stmt->close();
 
-    $dateOutputString = "n/a";
     if ($results->num_rows > 0) {
         $firstRow = $results->fetch_assoc();
+
+        $dateOutputString = "n/a";
         if ($firstRow['date'] == date('Y-m-d')) {
             $dateOutputString = "heute";
         } else {
@@ -21,13 +22,13 @@ if ($_GET['origin'] == "onDemandButton") {
             $dateOutputString = $date->format('d.m.');
         }
 
-         // Write to db
-		$stmt = $sqlConnetion->prepare("INSERT INTO onDemandEntry (ip, serviceDayId) VALUES (?)");
+        // Write to db
+		$stmt = $sqlConnetion->prepare("INSERT INTO onDemandEntry (ip, serviceDayId) VALUES (?,?)");
 		$stmt->bind_param('si', hash("sha256", $_SERVER['REMOTE_ADDR']), $firstRow['serviceDayId']);
 		$stmt->execute();
 		$stmt->close();
 
-		$sqlConnetion->close();
+        echo "write to db";
 
 		// Send mail
 		$to      = 	'rs@robinschnaidt.com';
@@ -42,6 +43,8 @@ if ($_GET['origin'] == "onDemandButton") {
 		// Redirect back
 		header("Location: on-demand.html?success=1");
     }
+
+    $sqlConnetion->close();
 } 
 
 // Redirect back

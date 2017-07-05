@@ -1,7 +1,7 @@
 <?php
 
-include_once('/etc/apache2/db-passwords/nightline.php');
-include_once('tokenHash.php');
+require_once('dienstplan/config.php');
+require_once('tokenHash.php');
 
 // Check permission to view
 if (hash("sha256", $_GET['token']) != $tokenHash) {
@@ -10,7 +10,7 @@ if (hash("sha256", $_GET['token']) != $tokenHash) {
 }
 
 // Fetch table from db
-$sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
 $stmt = $sqlConnetion->prepare("SELECT * FROM onDemandEntry;");
 $stmt->execute();

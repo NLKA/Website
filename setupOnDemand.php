@@ -1,9 +1,9 @@
 <?php
 
-include_once('/etc/apache2/db-passwords/nightline.php');
+require_once('dienstplan/config.php');
 
 // Create story table
-$sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
 // Note: We need 45 chars to save IPv4-mapped v6 addresses!
 $queryTable = "CREATE TABLE IF NOT EXISTS `onDemandEntry` (
