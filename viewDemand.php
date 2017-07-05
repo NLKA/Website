@@ -26,6 +26,7 @@ while ($row = $results->fetch_assoc()) {
     echo "<td>".$row['demandId']."</td>";
     echo "<td>".$row['time']."</td>";
     echo "<td>".$row['ip']."</td>";
+    echo "<td>".$row['serviceDayId']."</td>";
     echo "</tr>";
 }
 echo "</table>";
