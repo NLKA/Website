@@ -6,7 +6,7 @@ if ($_GET['origin'] == "onDemandButton") {
 	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
 	// Fetch next date
-	$stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date ASC;");
+	$stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
