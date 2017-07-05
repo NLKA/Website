@@ -37,43 +37,43 @@ function buildServiceTable($pUser) {
             echo "</td>";
 
             echo "<td>";
-                if ($row['service']) {
-                    $noConfirmedService = false;
-                    echo "<p>✅ Ja ";
-                    if ($pUser->isPrivileged) {
-                        echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
-                    }
-                    echo "</p>";
-                } else {
-                    // Check if at least two nightliners are available
-                    $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
-                    $stmt->bind_param('i', $row['serviceDayId']);
-                    $stmt->execute();
-                    $resultsUsers = $stmt->get_result();
-                    $stmt->close();
-
-                    $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-                    $oneMissing = $resultsUsers->num_rows == 1;
-                    if ($serviceStaffAvailable) {
-                        echo "<p>⏳ Ausstehend ";
+                echo "<p>";
+                    if ($row['service']) {
+                        $noConfirmedService = false;
+                        echo "✅ Ja ";
                         if ($pUser->isPrivileged) {
-                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
-                        }
-
-                        if ($rowCount == 0) {
-                            $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
-                        }
-                        if ($noConfirmedService && ($firstRowInOnDemand && $rowCount == 0 || !$firstRowInOnDemand && $rowCount == 1)) {
-                            echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
+                            echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
                         }
                     } else {
-                        if ($oneMissing) {
-                            echo "<p>⚠️👤 Zu wenige Nightliner "; 
+                        // Check if at least two nightliners are available
+                        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
+                        $stmt->bind_param('i', $row['serviceDayId']);
+                        $stmt->execute();
+                        $resultsUsers = $stmt->get_result();
+                        $stmt->close();
+
+                        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+                        $oneMissing = $resultsUsers->num_rows == 1;
+                        if ($serviceStaffAvailable) {
+                            echo "⏳ Ausstehend ";
+                            if ($pUser->isPrivileged) {
+                                echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
+                            }
+
+                            if ($rowCount == 0) {
+                                $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
+                            }
+                            if ($noConfirmedService && ($firstRowInOnDemand && $rowCount == 0 || !$firstRowInOnDemand && $rowCount == 1)) {
+                                echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
+                            }
                         } else {
-                            echo "<p>❌👥 Keine Nightliner "; 
+                            if ($oneMissing) {
+                                echo "<p>⚠️👤 Zu wenige Nightliner "; 
+                            } else {
+                                echo "<p>❌👥 Keine Nightliner "; 
+                            }
                         }
                     }
-                    echo "</p>";
 
                     // Display number of requests
                     $stmtRequests = $sqlConnetion->prepare("SELECT COUNT(*) AS count FROM onDemandEntry WHERE serviceDayId = ?;");
@@ -85,12 +85,12 @@ function buildServiceTable($pUser) {
                     $requestsRow = $resultsRequests->fetch_assoc();
                     echo "<p>";
                         if ($requestsRow['count'] == 0) {
-                            echo "Keine Anfragen";
+                            echo "(Keine Anfragen)";
                         } else {
-                            echo "Aktuelle Anfragen: ".$requestsRow['count'];
+                            echo "(Aktuelle Anfragen: ".$requestsRow['count'].")";
                         }
                     echo "</p>";
-                }
+                echo "</p>";
             echo "</td>";
 
     	   // load entries for this service day
@@ -190,9 +190,9 @@ function buildServiceTable($pUser) {
             $requestsRow = $resultsRequests->fetch_assoc();
             echo "<p>";
                 if ($requestsRow['count'] == 0) {
-                    echo "Keine Anfragen";
+                    echo "(Keine Anfragen)";
                 } else {
-                    echo "Aktuelle Anfragen: ".$requestsRow['count'];
+                    echo "(Aktuelle Anfragen: ".$requestsRow['count'].")";
                 }
             echo "</p>";
         echo "</td>";
