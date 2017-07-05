@@ -31,7 +31,7 @@ if ($_GET['origin'] == "onDemandButton") {
         echo "write to db";
 
 		// Send mail
-		$to      = 	'rs@robinschnaidt.com';
+		$to      = 	'ka-aktive@nl2.kip.uni-heidelberg.de';
 		$subject = 	'[NL-Bot] Dienst angefordert';
 		$message = 	'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
 		$headers = 	'From: no-reply@nightline-karlsruhe.de'."\r\n".
