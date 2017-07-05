@@ -85,7 +85,7 @@ function buildServiceTable($pUser) {
                     $requestsRow = $resultsRequests->fetch_assoc();
                     echo "<p>";
                         if ($requestsRow['count'] == 0) {
-                            echo "(Keine Anfragen)";
+                            echo "(Noch keine Anfragen)";
                         } else {
                             echo "(Aktuelle Anfragen: ".$requestsRow['count'].")";
                         }
