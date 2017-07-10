@@ -192,7 +192,7 @@ function buildServiceTable($pUser) {
                 if ($requestsRow['count'] == 0) {
                     echo "(Keine Anfragen)";
                 } else {
-                    echo "(Aktuelle Anfragen: ".$requestsRow['count'].")";
+                    echo "(Anfragen: ".$requestsRow['count'].")";
                 }
             echo "</p>";
         echo "</td>";
