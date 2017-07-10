@@ -13,14 +13,14 @@ $queryUserTable = "CREATE TABLE IF NOT EXISTS `user` (
             	`activated` boolean NOT NULL,
             	`isPrivileged` boolean NOT NULL,
             	PRIMARY KEY (`user`)
-        	) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
 $queryServiceDayStaff = "CREATE TABLE IF NOT EXISTS `serviceDayStaff` (
 				`serviceDayId` INT NOT NULL,
 				`user` varchar(20) NOT NULL,
                 `selected` boolean NOT NULL,
                 PRIMARY KEY (`serviceDayId`, `user`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 $queryOperationsLog = "CREATE TABLE IF NOT EXISTS `operationsLog` (
                 `logEntryId` INT NOT NULL AUTO_INCREMENT,
@@ -28,7 +28,14 @@ $queryOperationsLog = "CREATE TABLE IF NOT EXISTS `operationsLog` (
                 `user` varchar(20) NOT NULL,
                 `action` TEXT NOT NULL,
                 PRIMARY KEY (`logEntryId`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+$queryOnDemandToken = "CREATE TABLE IF NOT EXISTS `onDemandToken` (
+                `tokenId` INT NOT NULL AUTO_INCREMENT,
+                `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `token` TEXT NOT NULL,
+                PRIMARY KEY (`tokenId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 // Connect to db server
 $connection = new mysqli($dbServer, $dbUser, $dbPassword);
@@ -44,6 +51,7 @@ $connection->select_db($dbName);
 $connection->query($queryUserTable);
 $connection->query($queryServiceDayStaff);
 $connection->query($queryOperationsLog);
+$connection->query($queryOnDemandToken);
 echo "Created tables<br/>";
 
 // Check if there are accounts and create origin otherwise

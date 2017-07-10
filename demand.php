@@ -5,6 +5,25 @@ require_once('dienstplan/config.php');
 if ($_GET['origin'] == "onDemandButton") {
 	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
+    // Check token
+    $stmt = $sqlConnetion->prepare("SELECT * FROM onDemandToken WHERE token = ? AND DATE_ADD(time, INTERVAL 1 HOUR) >= NOW()");
+    $stmt->bind_param('s', $_GET['token']);
+    $stmt->execute();
+    $results = $stmt->get_result();
+    $stmt->close();
+
+    if ($results->num_rows != 1) {
+        echo "Token invalid";
+        exit();
+    } else {
+        // Remove token from db
+        $stmt = $sqlConnetion->prepare("DELETE FROM onDemandToken WHERE token = ?");
+        $stmt->bind_param('s', $_GET['token']);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        $stmt->close();
+    }
+
 	// Fetch next date
 	$stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
     $stmt->execute();
@@ -38,10 +57,8 @@ if ($_GET['origin'] == "onDemandButton") {
             $stmt->execute();
             $stmt->close();
 
-            echo "write to db";
-
             // Send mail
-            $to      =  'ka-aktive@nl2.kip.uni-heidelberg.de';
+            $to      =  'rs@robinschnaidt.com'; //'ka-aktive@nl2.kip.uni-heidelberg.de';
             $subject =  '[NL-Bot] Dienst angefordert';
             $message =  'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
             $headers =  'From: no-reply@nightline-karlsruhe.de'."\r\n".

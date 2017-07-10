@@ -8,10 +8,10 @@
                 <p>Damit wir genau dann erreichbar sind, wenn du uns brauchst, <b>kannst du ab sofort Bescheid sagen, wenn du an einem Tag anrufen möchtest</b>, an dem Nightliner auf Bereitschaft sein können. So können wir mehr potentielle Termine für unser Telefonangebot bereitstellen.</p>
 
                  <?php
-                    include_once('/etc/apache2/db-passwords/nightline.php');
+                    require_once('dienstplan/config.php');
 
                      // Prepare sql connection
-                    $sqlConnetion = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+                    $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
                     // Check if there is a cofirmed service in the future or today
                     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
@@ -33,6 +33,20 @@
 
                         $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
                         if ($serviceStaffAvailable) {
+                            if ($_GET['success'] != 1) {
+                                // Generate on demand token and write to db
+                                $token = join('-', str_split(bin2hex(openssl_random_pseudo_bytes(8)), 4));
+
+                                $stmt = $sqlConnetion->prepare("INSERT INTO onDemandToken (token) VALUES (?)");
+                                $stmt->bind_param('s', $token);
+                                $stmt->execute();
+                                $stmt->close();
+
+                                // Save token locally
+                                echo "<script>var onDemandToken='".$token."';</script>";
+                            }
+
+                            // Display ui
                             if ($firstRow['date'] == date('Y-m-d')) {
                                 echo "<a id='button' class='ym-button ym-next'>Dienst heute Abend 21-0h anfordern</a>";
                             } else {
@@ -87,12 +101,14 @@
 
         var secondClick = false;
         $('#button').click( function () {
-            if (secondClick) {
-                // activate button
-                $("#button").attr("href", "../demand.php?origin=onDemandButton");
-            } else {
-                // on first click: add warning text
-                $('#button').before("<br/><p style='background-color: #ffff00;'>Möchtest du einen Telefondienst vereinbaren? Unsere Nightliner werden dann im Dienst sein und gerne mit dir sprechen. <b>Wenn du noch nicht ganz sicher bist, ob du anrufen wirst, warte noch einen Moment ab</b> und fordere uns später an. <b>Wenn du sicher bist: Klicke jetzt nochmals auf den Button...</b></p>");
+            if (getParameterByName('success') == false) {
+                if (secondClick) {
+                    // activate button
+                    $("#button").attr("href", "../demand.php?origin=onDemandButton&token=" + onDemandToken);
+                } else {
+                    // on first click: add warning text
+                    $('#button').before("<br/><p style='background-color: #ffff00;'>Möchtest du einen Telefondienst vereinbaren? Unsere Nightliner werden dann im Dienst sein und gerne mit dir sprechen. <b>Wenn du noch nicht ganz sicher bist, ob du anrufen wirst, warte noch einen Moment ab</b> und fordere uns später an. <b>Wenn du sicher bist: Klicke jetzt nochmals auf den Button...</b></p>");
+                }
             }
 
             secondClick = true;
