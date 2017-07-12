@@ -65,7 +65,7 @@ if ($_GET['origin'] == "onDemandButton") {
                         'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
                         'X-Mailer: PHP/'.phpversion();
 
-            mail($to, $subject, $message, $headers);
+            // mail($to, $subject, $message, $headers);
 
             // Redirect back
             header("Location: on-demand.html?success=1");
