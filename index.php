@@ -8,41 +8,49 @@
     $pages[5] = array("inp/submit.html", "Submit", "submit.html");
     $pages[6] = array("inp/on-demand.html", "On Demand", "on-demand.html");
 
+    // Determine page id
     if (array_key_exists("page", $_GET)) {
         switch($_GET["page"]){
-          case "leitbild":
-            $incId = 1;
-            break;
-          case "unterstuetzen":
-            $incId = 2;
-            break;
-          case "impressum":
-            $incId = 3;
-            break;
-          case "links":
-            $incId = 4;
-            break;
-          case "submit":
+            case "leitbild":
+                $incId = 1;
+                break;
+
+            case "unterstuetzen":
+                $incId = 2;
+                break;
+
+            case "impressum":
+                $incId = 3;
+                break;
+
+            case "links":
+                $incId = 4;
+                break;
+
+            case "submit":
 		        $incId = 5;
-            break;
-          case "on-demand":
-            $incId = 6;
-            break;
-          default:
-            $incId = 0;
+                break;
+
+            case "on-demand":
+                $incId = 6;
+                break;
+
+            default:
+                $incId = 0;
+                break;
         }
     } else {
         $incId = 0;
     }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="de">
 <head>
 	<meta charset="utf-8"/>
 
 	<title>Nightline Karlsruhe - Studentisches Zuhörtelefon</title>
-	<meta name="description" content="Nightline, Karlsruhe, Pforzheim, Zuhörtelefon"/>
+	<meta name="description" content="Nightline, Karlsruhe, Pforzheim, Zuhörtelefon, Hochschulgruppe"/>
   	<meta name="author" content="Nightline Karlsruhe e.V."/>
 
   	<meta name="viewport" content="width=device-width">
@@ -51,101 +59,47 @@
 </head>
 
 <body>
-  <?php
-    require_once('dienstplan/config.php');
-
-    // Prepare sql connection
-    $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
-
-    // Check if there is a cofirmed service in the future or today
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
-    $stmt->execute();
-
-    $results = $stmt->get_result();
-    $stmt->close();
-
-    if ($results->num_rows > 0) {
-      // Display that a sure service is available
-      $firstRow = $results->fetch_assoc();
-      if ($firstRow['date'] == date('Y-m-d')) {
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir sind heute 21-0h für dich erreichbar unter 0721-75406646</div>";
-      } else {
-        $date = new DateTime($firstRow['date']);
-        $dateOutputString = $date->format('d.m.');
-        echo "<div id='topBar'><p id='topbarText'>☎️ Wir sind am ".$dateOutputString." 21-0h für dich erreichbar unter 0721-75406646</div>";
-      }
-    } else {
-       // Now check if there are scheduled services in the future or today that are bookable
-      $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
-      $stmt->execute();
-      $results = $stmt->get_result();
-      $stmt->close();
-
-      // ...and display topbar if this is the case
-      $hasOnDemandServiceDays = $results->num_rows > 0;
-      if ($hasOnDemandServiceDays) {
-        $firstRow = $results->fetch_assoc();
-
-        // check if two service staff members are present
-        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
-        $stmt->bind_param('i', $firstRow['serviceDayId']);
-        $stmt->execute();
-        $resultsUsers = $stmt->get_result();
-        $stmt->close();
-
-        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-        if ($serviceStaffAvailable) {
-          if ($firstRow['date'] == date('Y-m-d')) {
-            echo "<div id='topBar'><p id='topbarText'>☎️ Wir können heute 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
-          } else {
-            $date = new DateTime($firstRow['date']);
-            $dateOutputString = $date->format('d.m.');
-            echo "<div id='topBar'><p id='topbarText'>☎️ Wir können am ".$dateOutputString." 21-0h für dich erreichbar sein: <a href='on-demand.html' id='anfordern'>Telefondienst anfordern</a></div>";
-          }
-        }
-      }
-    }
-
-
-    // Close sql connection
-    $sqlConnetion->close();
-  ?>
-
-	<!-- <div id='topBar'><p id='topbarText'>☎️ Wir sind Do. 21-0 Uhr für dich erreichbar: 0721-75406646</p></div> -->
+    <?php 
+        require_once('onDemandEmbed.php');
+        buildOnDemandTopbar(); 
+    ?>
 	
 	<header>
 		<div class="ym-wrapper">
 			<div class="ym-wbox">
-        			<h1>
+                    <h1>
 					<img id="logoTop" src="img/nlka_logo_moon.png" alt="Nightline Karlsruhe" />
         			</h1>
 			</div>
 		</div>
 		
+        <!-- Pages Menu -->
 		<nav class="ym-hlist" id='navigation'>
 			<div class="ym-wrapper" id="navigationContainer">
-				<ul>
-       					<?php
-            					for ($k=0; $k<count($pages); $k++){
-	                        // Second condition removes impressum from title bar, third removes submit, last removes on-demand
-                					if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6) {
-                    						continue;
-                					}
-                					echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
-            					}
-            
-        				?>
+                <ul>
+       				<?php
+                        for ($k=0; $k<count($pages); $k++){
+                            // Second condition removes impressum from title bar, third removes submit, last removes on-demand
+                			if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6) {
+                                continue;
+                			}
+                            echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
+                        }
+        			?>
 				</ul>
 			</div>
 		</nav>
+        <!-- End Pages Menu -->
 	</header>
 	
+    <!-- Include Main Page -->
 	<main>
-		<?php
-      include($pages[$incId][0]);
+        <?php
+            include($pages[$incId][0]);
 		?>
 	</main>
-	
+	<!-- End Main Page -->
+
 	<footer>
 		<div class="ym-wrapper">
 			<div class="ym-wbox">

@@ -11,67 +11,8 @@
             <p>Die Nightline ist ein <b>Zuhörtelefon von Studierenden für Studierende</b>. Nightlines gibt es in verschiedenen Städten und sie bieten Dir die Möglichkeit, über Dinge zu reden, die Dich gerade beschäftigen. Egal, ob du Ersti oder Doktorand/in bist, egal, ob Du ein konkretes Anliegen hast oder du einfach jemanden zum Zuhören brauchst, eine Nightline hat immer ein offenes Ohr für dich. Auch wenn du Fragen hast und nicht weißt, an wen du Dich wenden sollst, kannst Du bei uns anrufen.</p><br/>
 
             <?php
-                require_once('dienstplan/config.php');
-
-                 // Prepare sql connection
-                $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
-
-                // Check if there is a confirmed service in the future or today
-                $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
-                $stmt->execute();
-                $results = $stmt->get_result();
-                $stmt->close();
-
-                if ($results->num_rows > 0) {
-                    // Display that a service is available
-                    $firstRow = $results->fetch_assoc();
-                    if ($firstRow['date'] == date('Y-m-d')) {
-                        echo "<p>Wir sind <b>heute Abend</b> 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar.</p>";
-                    } else {
-                        $date = new DateTime($firstRow['date']);
-                        $dateOutputString = $date->format('d.m.');
-                        echo "<p>Wir sind am <b>".$dateOutputString."</b> 21-0h für dich, wie gewohnt, unter der Nummer <b>0721-75406646</b> erreichbar.";
-                    }
-                } else {
-                    // Now check if there are scheduled services in the future or today that are bookable
-                    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
-                    $stmt->execute();
-                    $results = $stmt->get_result();
-                    $stmt->close();
-
-                    // ...and display text if this is the case
-                    $hasOnDemandServiceDays = $results->num_rows > 0;
-                    if ($hasOnDemandServiceDays) {
-                        $firstRow = $results->fetch_assoc();
-
-                        // check if two service staff members are present
-                        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
-                        $stmt->bind_param('i', $firstRow['serviceDayId']);
-                        $stmt->execute();
-                        $resultsUsers = $stmt->get_result();
-                        $stmt->close();
-
-                        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-                        if ($serviceStaffAvailable) {
-                            if ($firstRow['date'] == date('Y-m-d')) {
-                                echo "<p>Unseren nächsten Telefondienst kannst du für <b>heute Abend</b> zwischen 21 und 0 Uhr, <a href='on-demand.html'>hier anfordern</a>.</p>";
-                            } else {
-                                $date = new DateTime($firstRow['date']);
-                                $dateOutputString = $date->format('d.m.');
-                                echo "<p>Unseren nächsten Telefondienst kannst du für den<b> ".$dateOutputString."</b> 21-0h <a href='on-demand.html' id='anfordern'>hier anfordern.</a></p>";
-                            }
-                        } else {
-                            // Display that no service is scheduled
-                            echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />";
-                        }
-                    } else {
-                        // Display that no service is scheduled
-                        echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />";
-                    }
-                }
-
-                // Close sql connection
-                $sqlConnetion->close();
+                require_once('../onDemandEmbed.php');
+                buildOnDemandInline();
             ?>
 
             <p>Unter <a href="links.html">Anlaufstellen</a> findest du eine Liste von Institutionen, an die du dich in der Zwischenzeit wenden kannst und die dir gerne zuhörend oder beratend zur Seite stehen.</p>
