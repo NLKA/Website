@@ -3,6 +3,8 @@
 require_once('dienstplan/config.php');
 
 function buildOnDemandTopbar() {
+    global $dbServer, $dbUser, $dbPassword, $dbName;
+
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
@@ -60,6 +62,8 @@ function buildOnDemandTopbar() {
 }
 
 function buildOnDemandInline() {
+    global $dbServer, $dbUser, $dbPassword, $dbName;
+
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
@@ -122,6 +126,8 @@ function buildOnDemandInline() {
 }
 
 function buildOnDemandPage() {
+    global $dbServer, $dbUser, $dbPassword, $dbName;
+
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
