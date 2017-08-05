@@ -93,8 +93,9 @@ function buildServiceTable($pUser) {
                 echo "</p>";
             echo "</td>";
 
-    	   // load entries for this service day
+    	    // load entries for this service day
             echo "<td>";
+                // Print staff entries
                 $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
                 $stmt->bind_param('i', $row['serviceDayId']);
                 $stmt->execute();
@@ -121,6 +122,29 @@ function buildServiceTable($pUser) {
                     echo "</p>";
                 }
 
+                // Print staff notes
+                $stmt = $sqlConnetion->prepare("SELECT * FROM serviceStaffNote WHERE serviceDayId = ?");
+                $stmt->bind_param('i', $row['serviceDayId']);
+                $stmt->execute();
+                $resultsUsers = $stmt->get_result();
+                $stmt->close();
+
+                $isFirstNote = true;
+                while ($rowNote = $resultsUsers->fetch_assoc()) {
+                    if (!$isFirstNote) {
+                        echo "<br/>";
+                    } else {
+                        echo "<p>";
+                        $isFirstNote = false;
+                    }
+
+                    echo "(Notiz von ".$rowNote['user'].': '.$rowNote['note'].")";
+                }
+                if (!$isFirst) {
+                    echo "</p>";
+                }
+
+                // Add buttons
                 echo "<p>";
                     if ($selfHasEntry) {
                         echo " <a class='yellowButton' href='serviceStaffModify.php?op=delete&id=".$row['serviceDayId']."&user=".$pUser->user."'>Zurücknehmen</a>";
@@ -128,9 +152,11 @@ function buildServiceTable($pUser) {
                         echo " <a class='greenButton' href='serviceStaffModify.php?op=add&id=".$row['serviceDayId']."&user=".$pUser->user."'>Zum Dienst eintragen</a>";
                     }
 
-                if ($pUser->isPrivileged) {
-                    echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";
-                }
+                    if ($pUser->isPrivileged) {
+                        echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";
+                    }
+
+                    echo " <a class='greyButton' href='editServiceNote.php?id=".$row['serviceDayId']."'>+ Notiz</a>"; 
                 echo "</p>";
             echo "</td>";
         echo "</tr>";
@@ -221,9 +247,33 @@ function buildServiceTable($pUser) {
                 echo "</p>";
             }
 
+            // Print staff notes
+            $stmt = $sqlConnetion->prepare("SELECT * FROM serviceStaffNote WHERE serviceDayId = ?");
+            $stmt->bind_param('i', $row['serviceDayId']);
+            $stmt->execute();
+            $resultsUsers = $stmt->get_result();
+            $stmt->close();
+
+            $isFirstNote = true;
+            while ($rowNote = $resultsUsers->fetch_assoc()) {
+                if (!$isFirstNote) {
+                    echo "<br/>";
+                } else {
+                    echo "<p>";
+                    $isFirstNote = false;
+                }
+
+                echo "(Notiz von ".$rowNote['user'].": ".$rowNote['note'].")";
+            }
+            if (!$isFirst) {
+                echo "</p>";
+            }
+            
+            // Add button
             if ($pUser->isPrivileged) {
                 echo "<p><a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a></p>";
             }
+
             echo "</td>";
         echo "</tr>";
     }
