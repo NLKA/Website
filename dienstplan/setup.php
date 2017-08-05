@@ -37,6 +37,15 @@ $queryOnDemandToken = "CREATE TABLE IF NOT EXISTS `onDemandToken` (
                 PRIMARY KEY (`tokenId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$queryServiceStaffNote = "CREATE TABLE IF NOT EXISTS `serviceStaffNote` (
+                `noteId` INT NOT NULL AUTO_INCREMENT,
+                `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `user` varchar(20) NOT NULL,
+                `serviceDayId` INT NOT NULL,
+                `note` TEXT NOT NULL,
+                PRIMARY KEY (`noteId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
 // Connect to db server
 $connection = new mysqli($dbServer, $dbUser, $dbPassword);
 if ($connection->connect_errno) {
@@ -52,6 +61,7 @@ $connection->query($queryUserTable);
 $connection->query($queryServiceDayStaff);
 $connection->query($queryOperationsLog);
 $connection->query($queryOnDemandToken);
+$connection->query($queryServiceStaffNote);
 echo "Created tables<br/>";
 
 // Check if there are accounts and create origin otherwise
