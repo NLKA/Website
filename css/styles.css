@@ -43,6 +43,8 @@ body > header { background: none; }
     	background-color: black;
     	background-size: 1200px auto;
     	background-repeat: no-repeat;
+
+    	font-family: "Droid Sans", Helvetica, Arial, Sans;
 	}
 }
 
@@ -53,6 +55,8 @@ body > header { background: none; }
     	background-color: black;
     	background-size: 100% auto;
     	background-repeat: no-repeat;
+
+    	font-family: "Droid Sans", Helvetica, Arial, Sans;
 	}
 }
 
