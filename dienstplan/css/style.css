@@ -108,6 +108,10 @@ table, th, td {
 	padding: 15px;
 }
 
+.note {
+    color: gray;
+}
+
 #footer {
 	position: relative;
 

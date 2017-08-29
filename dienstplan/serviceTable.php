@@ -138,7 +138,7 @@ function buildServiceTable($pUser) {
                         $isFirstNote = false;
                     }
 
-                    echo "Notiz von ".trim($rowNote['user']).': '.$rowNote['note'];
+                    echo "<a class='note'>Notiz von ".trim($rowNote['user']).': '.$rowNote['note']."</a>";
                 }
                 if (!$isFirst) {
                     echo "</p>";
@@ -263,7 +263,7 @@ function buildServiceTable($pUser) {
                     $isFirstNote = false;
                 }
 
-                echo "Notiz von ".trim($rowNote['user']).": ".$rowNote['note'];
+                echo "<a class='note'>Notiz von ".trim($rowNote['user']).": ".$rowNote['note']."</a>";
             }
             if (!$isFirst) {
                 echo "</p>";
