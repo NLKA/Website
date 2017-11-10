@@ -58,7 +58,7 @@ if ($_GET['origin'] == "onDemandButton") {
             $stmt->close();
 
             // Send mail
-            $sendMail = false;
+            $sendMail = true;
             if ($sendMail) {
                 $to      =  'ka-aktive@nl2.kip.uni-heidelberg.de';
                 $subject =  '[NL-Bot] Dienst angefordert';
