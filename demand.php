@@ -58,14 +58,17 @@ if ($_GET['origin'] == "onDemandButton") {
             $stmt->close();
 
             // Send mail
-            $to      =  'ka-aktive@nl2.kip.uni-heidelberg.de';
-            $subject =  '[NL-Bot] Dienst angefordert';
-            $message =  'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
-            $headers =  'From: no-reply@nightline-karlsruhe.de'."\r\n".
-                        'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
-                        'X-Mailer: PHP/'.phpversion();
+            $sendMail = false;
+            if ($sendMail) {
+                $to      =  'ka-aktive@nl2.kip.uni-heidelberg.de';
+                $subject =  '[NL-Bot] Dienst angefordert';
+                $message =  'Es wurde eben ein Telefondienst für '.$dateOutputString.' angefordert. Einen schönen Tag dir! ☀️  -- Nightline Bot';
+                $headers =  'From: no-reply@nightline-karlsruhe.de'."\r\n".
+                            'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
+                            'X-Mailer: PHP/'.phpversion();
 
-            mail($to, $subject, $message, $headers);
+                mail($to, $subject, $message, $headers);
+            }
 
             // Redirect back
             header("Location: on-demand.html?success=1");
