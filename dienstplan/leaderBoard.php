@@ -18,7 +18,9 @@ function buildLeaderBoard($pUser) {
 
     $lastScore = -1;
     $count = 1;
-    while (($row = $results->fetch_assoc())  && $count <= 3) {
+
+    // Proceed until count 2 + 1
+    while (($row = $results->fetch_assoc())  && $count <= 2) {
         if ($lastScore != $row['score'] && $lastScore != -1) {
             $count++;
         }
