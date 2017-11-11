@@ -1,6 +1,7 @@
 <?php
 
 require_once('user.php');
+require_once('leaderBoard.php');
 require_once('usersTable.php');
 require_once('serviceTable.php');
 require_once('footer.php');
@@ -28,6 +29,7 @@ if (!$user) {
  			<h1>Nightline Karlsruhe</h1>
  			<p>Hallo <?php echo $user->user;?>! <a class='greyButton' href='logoutAccount.php'>Abmelden</a> <a class='greyButton' href='accountSettings.php'>Einstellungen</a></p>
 			<?php
+				buildLeaderBoard($user);
 				buildServiceTable($user);
 				buildUsersTable($user);
 			?>
