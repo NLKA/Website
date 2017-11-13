@@ -15,6 +15,18 @@ function buildServiceTable($pUser) {
         echo "<p><a class='greyButton' href='home.php?editServices=1'>Dienste bearbeiten</a></p>";
     }
 
+    // Add new service day form
+    echo "<form action='serviceDayModify.php' method='get'>";
+       echo "<label>Neuen Diensttermin anlegen (YYYY-MM-DD): </label>";
+       echo "<input type='hidden' name='op' value='add' />";
+       echo "<input type='text' id='datepicker' name='date'> ";
+       echo "<input type='submit' value='Anlegen'/>";
+    echo "</form>";
+
+    echo "<script src='js/jquery-ui/external/jquery/jquery.js'></script>";
+    echo "<script src='js/jquery-ui/jquery-ui.min.js'></script>";
+    echo "<script>$(function() { $('#datepicker').datepicker({dateFormat:'yy-mm-dd'}); });</script>";
+
 	// Fetch table from db
 	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 	$results = $sqlConnetion->query("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date;");
@@ -168,17 +180,6 @@ function buildServiceTable($pUser) {
 	echo "</table>";
 
 	echo "<br/>";
-	// Add new service day form
-	echo "<form action='serviceDayModify.php' method='get'>";
-	   echo "<label>Neuen Diensttermin anlegen (YYYY-MM-DD): </label>";
-	   echo "<input type='hidden' name='op' value='add' />";
-	   echo "<input type='text' id='datepicker' name='date'> ";
-	   echo "<input type='submit' value='Anlegen'/>";
-	echo "</form>";
-
-    echo "<script src='js/jquery-ui/external/jquery/jquery.js'></script>";
-    echo "<script src='js/jquery-ui/jquery-ui.min.js'></script>";
-    echo "<script>$(function() { $('#datepicker').datepicker({dateFormat:'yy-mm-dd'}); });</script>";
 
     // Build history
     echo "<h2>Vergangene Dienste</h2>";
