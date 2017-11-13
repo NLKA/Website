@@ -26,6 +26,7 @@ function buildServiceTable($pUser) {
     $noConfirmedService = true;
     $rowCount = 0;
     $firstRowInOnDemand = false;
+    $firstRowStaffAvailable = false;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
             echo "<td>";
@@ -62,8 +63,9 @@ function buildServiceTable($pUser) {
 
                             if ($rowCount == 0) {
                                 $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
+                                $firstRowStaffAvailable = $serviceStaffAvailable;
                             }
-                            if ($noConfirmedService && ($firstRowInOnDemand && $rowCount == 0 || !$firstRowInOnDemand && $rowCount == 1)) {
+                            if ($noConfirmedService && ($firstRowInOnDemand && $rowCount == 0 || !$firstRowInOnDemand && $firstRowStaffAvailable && $rowCount == 1)) {
                                 echo "<p><b>🚀 Aktiv in On-Demand</b></p>";
                             }
                         } else {
