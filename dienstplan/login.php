@@ -14,6 +14,7 @@
   			<input type="password" name="password"><br>
   			<input type= "submit" value= "Einloggen">
 		</form>
+		<p><b>Noch keinen Account?</b> <a href='register.php'>Hier registrieren</a></p>
 	</div>
 
 	<?php
