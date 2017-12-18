@@ -113,7 +113,7 @@ function buildOnDemandInline() {
                 }
             } else {
                 // Display that no service is scheduled
-                echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b> Momentan steht noch kein Termin fest.</p><br />";
+                echo "<p><b>Die nächsten Tage, an denen du einen Telefondienst anfordern kannst, werden an dieser Stelle bekanntgegeben.</b><br/>";
             }
         } else {
             // Display that no service is scheduled
@@ -122,17 +122,25 @@ function buildOnDemandInline() {
     }
 
     // Also display other dates
-    echo "<p>Mögliche weitere Termine, die bald angefordert werden können:</p>";
+    echo "<p>Mögliche nächste Termine sind: ";
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date > CURDATE() ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
 
+    $first = false;
     while ($row = $results->fetch_assoc()) {
+        if (!$first) {
+            echo " ,";
+        } else {
+            $first = false; 
+        }
+
         $date = new DateTime($row['date']);
         $dateOutputString = $date->format('d.m.');
-        echo "<p>".$dateOutputString."</p>";
+        echo $dateOutputString;
     }
+    echo "</p>";
     
     // Close sql connection
     $sqlConnetion->close();
