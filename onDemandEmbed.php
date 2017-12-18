@@ -128,8 +128,8 @@ function buildOnDemandInline() {
     $results = $stmt->get_result();
     $stmt->close();
 
-    while ($results = $stmt->get_result()) {
-        $date = new DateTime($results['date']);
+    while ($row = $results->fetch_assoc()) {
+        $date = new DateTime($row['date']);
         $dateOutputString = $date->format('d.m.');
         echo "<p>".$dateOutputString."</p>";
     }
