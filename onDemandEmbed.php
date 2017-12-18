@@ -122,13 +122,13 @@ function buildOnDemandInline() {
     }
 
     // Also display other dates
-    echo "<p>Mögliche nächste Termine sind: ";
+    echo "</br><p>Mögliche nächste Termine sind: ";
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date > CURDATE() ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
 
-    $first = false;
+    $first = true;
     while ($row = $results->fetch_assoc()) {
         if (!$first) {
             echo " ,";
@@ -140,7 +140,7 @@ function buildOnDemandInline() {
         $dateOutputString = $date->format('d.m.');
         echo $dateOutputString;
     }
-    echo "</p>";
+    echo "</p></br>";
     
     // Close sql connection
     $sqlConnetion->close();
