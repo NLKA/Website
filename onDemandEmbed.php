@@ -131,7 +131,7 @@ function buildOnDemandInline() {
     $first = true;
     while ($row = $results->fetch_assoc()) {
         if (!$first) {
-            echo " ,";
+            echo ", ";
         } else {
             $first = false; 
         }
