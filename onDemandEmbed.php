@@ -123,7 +123,7 @@ function buildOnDemandInline() {
 
     // Also display other dates
     echo "</br><p>Von uns geplante, aber noch unbestätigte nächste Termine: ";
-    $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date > CURDATE() ORDER BY date ASC;");
+    $stmt = $sqlConnetion->prepare("SELECT serviceDayId, COUNT(user) FROM serviceDay LEFT JOIN serviceDayStaff ON serviceDay.serviceDayId = serviceDayStaff.serviceDayId WHERE date > CURDATE() GROUP BY serviceDayId HAVING COUNT(user) < 2 ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
