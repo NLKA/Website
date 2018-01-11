@@ -58,6 +58,10 @@ function buildServiceTable($pUser) {
                             echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
                         }
                     } else {
+                        if ($pUser->isPrivileged) {
+                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
+                        }
+
                         // Check if at least two nightliners are available
                         $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
                         $stmt->bind_param('i', $row['serviceDayId']);
@@ -69,9 +73,6 @@ function buildServiceTable($pUser) {
                         $oneMissing = $resultsUsers->num_rows == 1;
                         if ($serviceStaffAvailable) {
                             echo "⏳ Ausstehend ";
-                            if ($pUser->isPrivileged) {
-                                echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
-                            }
 
                             if ($rowCount == 0) {
                                 $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
