@@ -131,6 +131,19 @@ function buildOnDemandInline() {
 
     $first = true;
     while ($row = $results->fetch_assoc()) {
+        // check if two service staff members are present...
+        $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
+        $stmt->bind_param('i', $row['serviceDayId']);
+        $stmt->execute();
+        $resultsUsers = $stmt->get_result();
+        $stmt->close();
+
+        // ... and skip date if this is the case
+        $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
+        if ($serviceStaffAvailable) {
+            continue;
+        }
+
         if (!$first) {
             echo ", ";
         } else {
