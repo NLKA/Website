@@ -49,7 +49,7 @@ function buildServiceTable($pUser) {
                 echo "</p>";
             echo "</td>";
 
-            echo "<td>";
+            echo "<td style='min-width:150px'>";
                 echo "<p>";
                     if ($row['service']) {
                         $noConfirmedService = false;
