@@ -41,7 +41,7 @@ function buildServiceTable($pUser) {
     $firstRowStaffAvailable = false;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
-            echo "<td>";
+            echo "<td style='min-width:150px'>";
                 echo "<p>".$row['date']." (".date("D", strtotime($row['date'])).") "; 
                 if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
                     echo "<a class='redButton' href='serviceDayModify.php?op=delete&id=".$row['serviceDayId']."'>Löschen</a>";    		
