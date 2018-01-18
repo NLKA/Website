@@ -59,7 +59,7 @@ function buildServiceTable($pUser) {
                         }
                     } else {
                         if ($pUser->isPrivileged) {
-                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a>";        
+                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a><br/>";        
                         }
 
                         // Check if at least two nightliners are available
@@ -153,7 +153,7 @@ function buildServiceTable($pUser) {
                         $isFirstNote = false;
                     }
 
-                    echo "<a class='note'>Notiz von ".trim($rowNote['user']).': '.$rowNote['note']."</a>";
+                    echo "<a class='note'><b>Notiz von ".trim($rowNote['user']).'</b>: '.$rowNote['note']."</a><br/>";
                 }
                 if (!$isFirst) {
                     echo "</p>";
