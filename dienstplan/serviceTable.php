@@ -72,7 +72,7 @@ function buildServiceTable($pUser) {
                         $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
                         $oneMissing = $resultsUsers->num_rows == 1;
                         if ($serviceStaffAvailable) {
-                            echo "⏳ Ausstehend ";
+                            echo "<br/>⏳ Ausstehend ";
 
                             if ($rowCount == 0) {
                                 $firstRowInOnDemand = ((int)date('H') < 16 || date('Y-m-d') != $row['date']);
