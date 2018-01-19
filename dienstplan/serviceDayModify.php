@@ -73,7 +73,7 @@ if ($user->isPrivileged) {
                     'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
                     'X-Mailer: PHP/'.phpversion();
                 
-        //mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
 
         // log action
         //logAction($user, "[Service] Confirm service #".$_GET['id']);
