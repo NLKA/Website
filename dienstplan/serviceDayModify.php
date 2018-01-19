@@ -22,6 +22,9 @@ if ($_GET['op'] == "add") {
         $stmt->bind_param('s', $_GET['date']);
         $stmt->execute();
         $stmt->close();
+
+        // log action
+        logAction($user, "[Service] Add service date".$_GET['date']);
     }
 }
 
@@ -32,6 +35,9 @@ if ($user->isPrivileged) {
         $stmt->execute();
         $results = $stmt->get_result();
         $stmt->close();
+
+        // log action
+        logAction($user, "[Service] Delete service #".$_GET['id']);
     }
 
     if ($_GET['op'] == "confirm") {
@@ -67,7 +73,10 @@ if ($user->isPrivileged) {
                     'Reply-To: no-reply@nightline-karlsruhe.de'."\r\n".
                     'X-Mailer: PHP/'.phpversion();
                 
-        mail($to, $subject, $message, $headers);
+        //mail($to, $subject, $message, $headers);
+
+        // log action
+        //logAction($user, "[Service] Confirm service #".$_GET['id']);
     }
 
     if ($_GET['op'] == "unconfirm") {
