@@ -118,6 +118,7 @@ function buildServiceTable($pUser) {
                 $stmt->close();
 
                 $selfHasEntry = false;
+                $dummyHasEntry = false;
                 $isFirst = true;
                 while ($rowUser = $resultsUsers->fetch_assoc()) {
                     if (!$isFirst) {
@@ -129,8 +130,12 @@ function buildServiceTable($pUser) {
 
                     echo $rowUser['user'];
 
+                    // Check existing users
                     if ($rowUser['user'] == $pUser->user) {
                         $selfHasEntry = true;
+                    }
+                    if ($rowUser['user'] == "DummyUser") {
+                        $dummyHasEntry = true;
                     }
                 }
                 if (!$isFirst) {
@@ -166,6 +171,11 @@ function buildServiceTable($pUser) {
                     } else {
                         echo " <a class='greenButton' href='serviceStaffModify.php?op=add&id=".$row['serviceDayId']."&user=".$pUser->user."'>Zum Dienst eintragen</a>";
                     }
+
+                    if (!$dummyHasEntry) {
+                        echo " <a class='greyButton' href='serviceStaffModify.php?op=add&id=".$row['serviceDayId']."&user=DummyUser'>Dummy eintragen</a>";
+                    }
+                    echo "<br/>";
 
                     if ($pUser->isPrivileged) {
                         echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";

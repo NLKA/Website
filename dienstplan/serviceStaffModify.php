@@ -18,7 +18,7 @@ if (!$user) {
 $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
 if ($_GET['op'] == "add") {
-    $stmt = $sqlConnetion->prepare("INSERT INTO serviceDayStaff (serviceDayId, user) VALUES (?, ?)");
+    $stmt = $sqlConnetion->prepare("INSERT INTO serviceDayStaff (serviceDayId, user) VALUES (?, ?);");
     $stmt->bind_param('is', $_GET['id'], $_GET['user']);
     $stmt->execute();
     $stmt->close();
@@ -27,7 +27,7 @@ if ($_GET['op'] == "add") {
     logAction($user, "[Service] Add entry for ".$_GET['user']." at service #".$_GET['id']);
 }
 
-if ($user->isPrivileged || $user->user == $_GET['user']) {
+if ($user->isPrivileged || $user->user == $_GET['user'] || $_GET['user'] == "DummyUser") {
     if ($_GET['op'] == "delete") {
         $stmt = $sqlConnetion->prepare("DELETE FROM serviceDayStaff WHERE serviceDayId = ? AND user = ?;");
         $stmt->bind_param('is', $_GET['id'], $_GET['user']);
