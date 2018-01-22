@@ -176,6 +176,7 @@ function buildServiceTable($pUser) {
                         echo " <a class='greyButton' href='serviceStaffModify.php?op=add&id=".$row['serviceDayId']."&user=DummyUser'>Dummy eintragen</a>";
                     }
                     echo "<br/>";
+                    echo "<br/>";
 
                     if ($pUser->isPrivileged) {
                         echo " <a class='greyButton' href='editServiceStaff.php?id=".$row['serviceDayId']."'>Bearbeiten</a>";
