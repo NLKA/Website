@@ -96,6 +96,10 @@ table {
     width: 100%;
 }
 
+.serviceColumn {
+    min-width: 225px;
+}
+
 .ui-datepicker 
 {
     background-color: white;

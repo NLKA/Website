@@ -41,7 +41,7 @@ function buildServiceTable($pUser) {
     $firstRowStaffAvailable = false;
 	while ($row = $results->fetch_assoc()) {
 		echo "<tr>";
-            echo "<td style='min-width:150px'>";
+            echo "<td class='serviceColumn'>";
                 echo "<p>".$row['date']." (".date("D", strtotime($row['date'])).") "; 
                 if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
                     echo "<a class='redButton' href='serviceDayModify.php?op=delete&id=".$row['serviceDayId']."'>Löschen</a>";    		
@@ -49,7 +49,7 @@ function buildServiceTable($pUser) {
                 echo "</p>";
             echo "</td>";
 
-            echo "<td style='min-width:225px'>";
+            echo "<td class='serviceColumn'>";
                 echo "<p>";
                     if ($row['service']) {
                         $noConfirmedService = false;
@@ -207,14 +207,14 @@ function buildServiceTable($pUser) {
 
     while ($row = $results->fetch_assoc()) {
         echo "<tr>";
-            echo "<td>".$row['date']." (".date("D", strtotime($row['date'])).")";
+            echo "<td class='serviceColumn'>".$row['date']." (".date("D", strtotime($row['date'])).")";
             if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
                 echo " <a class='redButton' href='serviceDayModify.php?op=delete&id=".$row['serviceDayId']."'>Löschen</a>";
             
             }
         echo "</td>";
 
-        echo "<td>";
+        echo "<td class='serviceColumn'>";
             if ($row['service']) {
                 echo "✅ Ja";
             } else {
