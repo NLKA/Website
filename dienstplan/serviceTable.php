@@ -208,7 +208,7 @@ function buildServiceTable($pUser) {
     $MAX_HISTORY_ROWS = 5;
 
     $rowCount = 0;
-    while ($row = $results->fetch_assoc() && $rowCount < $MAX_HISTORY_ROWS) {
+    while (($row = $results->fetch_assoc()) && ($rowCount < $MAX_HISTORY_ROWS)) {
         echo "<tr>";
             echo "<td class='serviceColumn'>".$row['date']." (".date("D", strtotime($row['date'])).")";
             if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
