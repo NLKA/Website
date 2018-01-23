@@ -205,7 +205,10 @@ function buildServiceTable($pUser) {
     echo "<table border='1' style='width: 100%;'>";
     echo "<tr><th>Datum</th><th>Fand statt</th><th>Nightliner</th></tr>";
 
-    while ($row = $results->fetch_assoc()) {
+    $MAX_HISTORY_ROWS = 5;
+
+    $rowCount = 0;
+    while ($row = $results->fetch_assoc() && $rowCount < $MAX_HISTORY_ROWS) {
         echo "<tr>";
             echo "<td class='serviceColumn'>".$row['date']." (".date("D", strtotime($row['date'])).")";
             if ($pUser->isPrivileged && $_GET['editServices'] == 1) {
@@ -291,8 +294,14 @@ function buildServiceTable($pUser) {
 
             echo "</td>";
         echo "</tr>";
+
+        $rowCount++;
     }
     echo "</table>";
+
+    if ($rowCount == $MAX_HISTORY_ROWS) {
+        echo "<p>(Einige ältere Dienste werden nicht angezeigt)</p>";
+    }
 
 	$sqlConnetion->close();
 }
