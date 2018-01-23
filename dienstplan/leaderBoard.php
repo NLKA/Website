@@ -21,7 +21,7 @@ function buildLeaderBoard($pUser) {
 
     // Proceed until count 2 + 1
     while (($row = $results->fetch_assoc())  && $count <= 2) {
-        if ($lastScore != $row['score'] && $lastScore != -1) {
+        if ($lastScore != $row['score'] && $row['user'] != "DummyUser" && $lastScore != -1) {
             $count++;
         }
 
