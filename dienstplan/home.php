@@ -27,7 +27,7 @@ if (!$user) {
 	<body>
  		<div id='content'>
  			<h1>Nightline Karlsruhe</h1>
- 			<p>Hallo <?php echo $user->user;?>! <a class='greyButton' href='logoutAccount.php'>Abmelden</a> &nbsp; <a class='greyButton' href='accountSettings.php'>Einstellungen</a><a class='greyButton' target='_blank' href='https://intranet.nightlines.eu/foswiki/'>Link zum Wiki ↗︎</a></p>
+ 			<p>Hallo <?php echo $user->user;?>! <a class='greyButton' href='logoutAccount.php'>Abmelden</a> <a class='greyButton' href='accountSettings.php'>Einstellungen</a> &nbsp; <a class='greyButton' target='_blank' href='https://intranet.nightlines.eu/foswiki/'>Link zum Wiki ↗︎</a></p>
 			<?php
 				buildLeaderBoard($user);
 				buildServiceTable($user);
