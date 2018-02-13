@@ -140,7 +140,7 @@ function buildOnDemandInline() {
 
         // ... and skip date if this is the case
         $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-        if ($serviceStaffAvailable) {
+        if ($serviceStaffAvailable && $first) {
             continue;
         }
 
