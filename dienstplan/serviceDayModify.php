@@ -24,9 +24,10 @@ if ($_GET['op'] == "add") {
         $stmt->close();
 
         // log action
-        logAction($user, "[Service] Add service date".$_GET['date']);
+        // logAction($user, "[Service] Add service date".$_GET['date']);
     }
 }
+
 
 if ($user->isPrivileged) {
     if ($_GET['op'] == "delete") {
