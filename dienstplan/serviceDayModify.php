@@ -2,6 +2,7 @@
 
 require_once('user.php');
 require_once('config.php');
+require_once('logger.php');
 
 global $dbServer, $dbUser, $dbPassword, $dbName;
 
@@ -24,7 +25,7 @@ if ($_GET['op'] == "add") {
         $stmt->close();
 
         // log action
-        // logAction($user, "[Service] Add service date".$_GET['date']);
+        logAction($user, "[Service] Add service date".$_GET['date']);
     }
 }
 
@@ -77,7 +78,7 @@ if ($user->isPrivileged) {
         mail($to, $subject, $message, $headers);
 
         // log action
-        //logAction($user, "[Service] Confirm service #".$_GET['id']);
+        logAction($user, "[Service] Confirm service #".$_GET['id']);
     }
 
     if ($_GET['op'] == "unconfirm") {
