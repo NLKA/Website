@@ -36,6 +36,10 @@
                 $incId = 6;
                 break;
 
+            case "datenschutz":
+                $incId = 7;
+                break;
+
             default:
                 $incId = 0;
                 break;
@@ -81,7 +85,7 @@
        				<?php
                         for ($k=0; $k<count($pages); $k++){
                             // Second condition removes impressum from title bar, third removes submit, last removes on-demand
-                			if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6) {
+                			if (count($pages[$k]) == 1 || $k == 3 || $k == 5 || $k == 6 || $k == 7) {
                                 continue;
                 			}
                             echo "<li".($k==$incId?" class=\"active\"":"")."><a href=\"".$pages[$k][2]."\">".$pages[$k][1]."</a></li>\n";
