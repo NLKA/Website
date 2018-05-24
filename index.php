@@ -106,6 +106,7 @@
 				<p>Header image <a href='https://commons.wikimedia.org/wiki/User:Leviathan1983#/media/File:Stars_01_(MK).jpg'>"starry sky near Brandenburg an der Havel (Germany), close to midnight"</a> by <a href='https://commons.wikimedia.org/wiki/User:Leviathan1983'>Mathias Krumbholz</a> 2014, modified (CC BY-SA 3.0).<br/><br/> Nightline Karlsruhe e.V.</p>
 				<p><a href="dienstplan/">Zum internen Bereich</a></p>
                 <p><a href="impressum.html">Impressum</a></p>
+                <p><a href="datenschutz.html">Datenschutzerklärung</a></p>
 			</div>
 		</div>
 	</footer>
