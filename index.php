@@ -7,6 +7,7 @@
     $pages[4] = array("inp/links.html", "Anlaufstellen", "links.html");
     $pages[5] = array("inp/submit.html", "Submit", "submit.html");
     $pages[6] = array("inp/on-demand.html", "On Demand", "on-demand.html");
+    $pages[7] = array("inp/datenschutz.html", "Datenschutz", "datenschutz.html");
 
     // Determine page id
     if (array_key_exists("page", $_GET)) {
@@ -106,7 +107,7 @@
 				<p>Header image <a href='https://commons.wikimedia.org/wiki/User:Leviathan1983#/media/File:Stars_01_(MK).jpg'>"starry sky near Brandenburg an der Havel (Germany), close to midnight"</a> by <a href='https://commons.wikimedia.org/wiki/User:Leviathan1983'>Mathias Krumbholz</a> 2014, modified (CC BY-SA 3.0).<br/><br/> Nightline Karlsruhe e.V.</p>
 				<p><a href="dienstplan/">Zum internen Bereich</a></p>
                 <p><a href="impressum.html">Impressum</a></p>
-                <p><a href="inp/datenschutz.html">Datenschutzerklärung</a></p>
+                <p><a href="datenschutz.html">Datenschutzerklärung</a></p>
 			</div>
 		</div>
 	</footer>
