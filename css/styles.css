@@ -337,6 +337,11 @@ h2, .box h2 {
 	width: 485px;
 }
 
+#logoFoerderverein {
+	width:130px;
+	height:130px;
+}
+
 #calendar {
 	height: 300px;
 	width:100%;
