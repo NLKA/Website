@@ -8,6 +8,7 @@
     $pages[5] = array("inp/submit.html", "Submit", "submit.html");
     $pages[6] = array("inp/on-demand.html", "On Demand", "on-demand.html");
     $pages[7] = array("inp/datenschutz.html", "Datenschutz", "datenschutz.html");
+    $pages[8] = array("inp/mitmachen.html", "Mach mit!", "mitmachen.html");
 
     // Determine page id
     if (array_key_exists("page", $_GET)) {
@@ -38,6 +39,10 @@
 
             case "datenschutz":
                 $incId = 7;
+                break;
+
+            case "mitmachen":
+                $incId = 8;
                 break;
 
             default:
