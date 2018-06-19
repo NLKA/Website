@@ -46,6 +46,16 @@ $queryServiceStaffNote = "CREATE TABLE IF NOT EXISTS `serviceStaffNote` (
                 PRIMARY KEY (`noteId`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+$queryCalendarEntry = "CREATE TABLE IF NOT EXISTS `calendarEntry` (
+                `entryId` INT NOT NULL AUTO_INCREMENT,
+                `timeAdded` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `user` varchar(20) NOT NULL,
+                `date` TEXT NOT NULL,
+                `time` TEXT NOT NULL,
+                `entry` TEXT NOT NULL,
+                PRIMARY KEY (`entryId`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
 // Connect to db server
 $connection = new mysqli($dbServer, $dbUser, $dbPassword);
 if ($connection->connect_errno) {
@@ -62,6 +72,7 @@ $connection->query($queryServiceDayStaff);
 $connection->query($queryOperationsLog);
 $connection->query($queryOnDemandToken);
 $connection->query($queryServiceStaffNote);
+$connection->query($queryCalendarEntry);
 echo "Created tables<br/>";
 
 // Check if there are accounts and create origin otherwise
