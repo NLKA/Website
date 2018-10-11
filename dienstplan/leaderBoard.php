@@ -25,7 +25,7 @@ function buildLeaderBoard($pUser) {
             $count++;
         }
 
-        echo "<a>".$count.". ".$row['user']." (Score: ".$row['score'].")</a>";
+        echo "<a>".$count.". ".$row['user']." (".$row['score'].")</a>";
         if ($count == 1) {
             echo " <a>🎉</a>";
         }
