@@ -17,7 +17,7 @@ function buildServiceTable($pUser) {
 
     // Add new service day form
     echo "<form action='serviceDayModify.php' method='get'>";
-       echo "<label>Neuen Diensttermin anlegen (YYYY-MM-DD): </label>";
+       echo "<label>Neuen Diensttermin anlegen (JJJJ-MM-TT): </label>";
        echo "<input type='hidden' name='op' value='add' />";
        echo "<input type='text' id='datepicker' name='date'> ";
        echo "<input type='submit' value='Anlegen'/>";
