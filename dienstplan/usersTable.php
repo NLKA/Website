@@ -54,7 +54,9 @@ function buildUsersTable($pUser) {
     	if ($row['activated']) {
     		echo "<td>";
                 echo "<p>Aktiviert</p>";
-                echo "<p><a class='redButton' href='activateAccount.php?user=".$row['user']."&activate=0'>Sperren</a></p>";
+                if ($_GET['editUsers'] == 1) {
+                    echo "<p><a class='redButton' href='activateAccount.php?user=".$row['user']."&activate=0'>Sperren</a></p>";
+                }
             echo "</td>";
     	} else {
     		echo "<td>";
