@@ -38,7 +38,7 @@ function buildUsersTable($pUser) {
 
             if ($row['isPrivileged']) {
                 echo "<td>";
-                    echo "<p>Admin</p>";
+                    echo "<p><b>Admin</b></p>";
                     if ($_GET['editUsers'] == 1) {
                         echo "<p><a class='yellowButton' href='changeAdmin.php?user=".$row['user']."&privileged=0'>Zu normalem User machen</a></p>";
                     }
