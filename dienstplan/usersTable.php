@@ -31,8 +31,7 @@ function buildUsersTable($pUser) {
             echo "</td>";
             
             echo "<td>";
-                $discardedEmailAddress = (string)($row['email'].charAt(0)).(string)($row['email'].charAt(1))."xxxx@xxxxx.xx";
-                echo "<p>".$discardedEmailAddress."</p>";
+                // echo "<p>".$discardedEmailAddress."</p>";
                 echo "<p><a class='yellowButton' href='passwordReset.php?user=".$row['user']."'>Passwort zurücksetzen</a></p>";
             echo "</td>";
 
