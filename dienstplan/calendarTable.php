@@ -13,11 +13,11 @@ function buildCalendarTable($pUser) {
 	echo "<h1>Öffentlicher Kalendar</h1>";
 	echo "<h2>Neuer Eintrag</h2>";
   echo "<form action='calendarModify.php' method='get'>";
-    echo "<label>Datum (YYYY-MM-DD): </label>";
+    echo "<label>Datum: </label>";
     echo "<input type='hidden' name='op' value='add' />";
-    echo "<input type='text' id='datepicker' name='date'> <br/>";
-    echo "<label>Uhrzeit (Zeit, Dauer oder leer): </label>";
-    echo "<input type='text' id='timepicker' name='time'> <br/>";
+    echo "<input type='text' id='datepicker' name='date' placeholder='JJJJ-MM-TT'> <br/>";
+    echo "<label>Uhrzeit: </label>";
+    echo "<input type='text' id='timepicker' name='time' placeholder='Zeit, Dauer oder leer'> <br/>";
     echo "<label>Eintrag: </label>";
     echo "<input type='text' id='subject' name='entry'> <br/>";
     echo "<input type='submit' value='Anlegen'/>";
