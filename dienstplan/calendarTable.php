@@ -30,8 +30,9 @@ function buildCalendarTable($pUser) {
   $stmt->execute();
   $results = $stmt->get_result();
   $stmt->close();
-  
-	echo "<table>";
+
+  if ($results->num_rows > 0) {
+    echo "<table>";
     echo "<tr><th>Datum</th><th>Uhrzeit</th><th>Eintrag</th></tr>";
       while ($row = $results->fetch_assoc()) {
         echo "<tr>";
@@ -41,9 +42,9 @@ function buildCalendarTable($pUser) {
             
           echo "<td>";
             if ($row['time'] == "") {
-            	echo "--";
+              echo "--";
             } else {
-            	echo "<p>".$row['time']."</p>";
+              echo "<p>".$row['time']."</p>";
             }
           echo "</td>";
 
@@ -51,9 +52,12 @@ function buildCalendarTable($pUser) {
             echo "<p>".$row['entry']."</p>";
             echo "<p><a class='redButton' href='calendarModify.php?op=delete&id=".$row['entryId']."'>Löschen</a></p>";
           echo "</td>";
-		    echo "</tr>";
+        echo "</tr>";
       }
-	echo "</table>";
+    echo "</table>";
+  } else {
+    echo "<p>Noch keine Kalendereinträge vorhanden.</p>";
+  }
 
   // Include scripts and build date picker
   echo "<script src='js/jquery-ui/external/jquery/jquery.js'></script>";
