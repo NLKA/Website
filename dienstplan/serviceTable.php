@@ -58,9 +58,7 @@ function buildServiceTable($pUser) {
                             echo "<a class='yellowButton' href='serviceDayModify.php?op=unconfirm&id=".$row['serviceDayId']."'>Widerrufen</a>";	
                         }
                     } else {
-                        if ($pUser->isPrivileged) {
-                            echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a><br/>";        
-                        }
+                        echo "<a class='greenButton' href='serviceDayModify.php?op=confirm&id=".$row['serviceDayId']."'>Bestätigen</a><br/>";
 
                         // Check if at least two nightliners are available
                         $stmt = $sqlConnetion->prepare("SELECT user FROM serviceDayStaff WHERE serviceDayId = ?");
