@@ -16,7 +16,7 @@ function buildCalendarInline() {
 
     if ($results->num_rows > 0) {
         echo "<table>";
-            echo "<tr><th>Datum</th><th>Uhrzeit</th><th>Eintrag</th></tr>";
+            echo "<tr><th>Datum</th><th>Uhrzeit oder Dauer</th><th>Was?</th></tr>";
                 while ($row = $results->fetch_assoc()) {
                     // Print entry
                     echo "<tr>";
