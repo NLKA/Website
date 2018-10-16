@@ -130,6 +130,7 @@ function buildOnDemandInline() {
 
     $furtherDatesAvailable = false;
     $first = true;
+    $dateWasAdded = false;
     while ($row = $results->fetch_assoc()) {
         if (!$furtherDatesAvailable) {
             echo "</br><p>Von uns geplante, aber noch unbestätigte nächste Termine: ";
@@ -150,7 +151,7 @@ function buildOnDemandInline() {
             continue;
         }
 
-        if (!$first) {
+        if (!$first && $dateWasAdded) {
             echo ", ";
         } else {
             $first = false; 
@@ -159,6 +160,9 @@ function buildOnDemandInline() {
         $date = new DateTime($row['date']);
         $dateOutputString = $date->format('d.m.');
         echo $dateOutputString;
+
+        // Remember that a date hase been added for display
+        $dateWasAdded = true;
     }
 
     if ($furtherDatesAvailable) {
