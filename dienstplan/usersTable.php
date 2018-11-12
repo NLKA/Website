@@ -31,9 +31,9 @@ function buildUsersTable($pUser) {
             echo "</td>";
             
             echo "<td>";
-                $discardedEmailAddress = $row['email'][0].$row['email'][1]."xxxx@xxxxx.xx";
-                echo "<p>".$discardedEmailAddress."</p>";
-                echo "<p><a class='yellowButton' href='passwordReset.php?user=".$row['user']."'>Passwort zurücksetzen</a></p>";
+                // $discardedEmailAddress = $row['email'][0].$row['email'][1]."xxxx@xxxxx.xx";
+                echo "<p>(Nur Hash verfügbar)</p>";
+                // echo "<p><a class='yellowButton' href='passwordReset.php?user=".$row['user']."'>Passwort zurücksetzen</a></p>";
             echo "</td>";
 
             if ($row['isPrivileged']) {
