@@ -23,7 +23,7 @@ try {
 	User::create($username, $password, $email);
 
 	echo "<h2>Account wurde erstellt</h2>";
-	echo "<p>Der Account ".$username." wurde angelegt. Nun muss dieser nur noch von der Nightline bestätigt werden - wir senden dir dann eine Email. <a href='login.php'>Hier geht es zum Login</a></p>";
+	echo "<p>Der Account ".$username." wurde angelegt. Nun muss dieser nur noch von der Nightline bestätigt werden, schau später wieder vorbei. <a href='login.php'>Hier geht es zum Login</a></p>";
 } catch (Exception $e) {
 	echo "<h2>Erneut versuchen</h2>";
 	echo "<p>Der Account konnte nicht erstellt werden: ";
