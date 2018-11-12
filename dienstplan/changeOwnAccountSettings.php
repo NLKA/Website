@@ -12,13 +12,21 @@ if ($user) {
 	$sqlConnection = User::connect();
 
 	if ($_GET['type'] == "email") {
-		User::changeEmail($user->user, htmlspecialchars($_POST['value']));
-		header('Location: accountSettings.php');
+		$success = User::changeEmail($user->user, htmlspecialchars($_POST['value']));
+		if ($success) {
+			header('Location: accountSettings.php');
+		} else {
+			echo("Could not change email address, not valid. Try again");
+		}
 	}
 
 	if ($_GET['type'] == "password") {
-		User::changePassword($user->user, htmlspecialchars($_POST['value']));
-		header('Location: logoutAccount.php');
+		$success = User::changePassword($user->user, htmlspecialchars($_POST['value']));
+		if ($success) {
+			header('Location: logoutAccount.php');
+		} else {
+			echo("Could not change password (minimum 6 characters needed). Try again");
+		}
 	}
 } else {
 	echo "Please log in first";
