@@ -7,6 +7,10 @@ function buildCalendarInline() {
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
+    if ($sqlConnetion->connect_errno) {
+        echo("<p>Kalender derzeit nicht verfügbar.<p>");
+        return; // Do nothing else 
+    }
 
     // Print calendar
     $stmt = $sqlConnetion->prepare("SELECT * FROM calendarEntry WHERE date >= CURDATE() ORDER BY date ASC");

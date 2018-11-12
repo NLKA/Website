@@ -7,6 +7,9 @@ function buildOnDemandTopbar() {
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
+    if ($sqlConnetion->connect_errno) {
+        return; // Do nothing else 
+    }
 
     // Check if there is a cofirmed service in the future or today
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
@@ -66,6 +69,9 @@ function buildOnDemandInline() {
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
+    if ($sqlConnetion->connect_errno) {
+        return; // Do nothing else 
+    }
 
     // Check if there is a confirmed service in the future or today
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() AND service = 1 ORDER BY date ASC;");
@@ -178,6 +184,9 @@ function buildOnDemandPage() {
 
     // Prepare sql connection
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
+    if ($sqlConnetion->connect_errno) {
+        return; // Do nothing else 
+    }
 
     // Check if there is a cofirmed service in the future or today
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE DATE_ADD(TIMESTAMP(date), INTERVAL 16 HOUR) >= NOW() AND service = 0 ORDER BY date ASC;");
