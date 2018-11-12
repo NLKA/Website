@@ -9,7 +9,7 @@ class User {
   // PROPERTIES, REFERENCES
   // - - - - - - - - - - - -
   
-  private $userData;  // user, password, email, sessionStart, sessionID
+  private $userData;  // user, password, email (hashed!), sessionStart, sessionID
   private $sqlConnetion;
 
   // - - - - - - - - -
@@ -40,14 +40,16 @@ class User {
   public static function create($pUser, $pPassword, $pEmail) {
     $sqlConnetion = User::connect();
 
+    // Prepare hashed email
+    $emailHash = $sqlConnetion->real_escape_string(usersHash($pEmail));
+
     // Check if user name or email taken
-    if (checkUsernameExists($sqlConnetion, $pUser) ||
-        checkEmailExists($sqlConnetion, $pEmail)) {
-      throw new Exception('Name oder Emailadresse schon vergeben');
+    if (checkUsernameExists($sqlConnetion, $pUser)) {
+      throw new Exception('Name schon vergeben');
     }
 
-    // Check if email is valid
-    if (!filter_var($pEmail, FILTER_VALIDATE_EMAIL)) {
+    // Check if email (non hashed!) is valid
+    if (!filter_var($pEmail, FILTER_VALIDATE_EMAIL)) {  // Check with unhashed address
       throw new Exception('Keine gültige Emailadresse angegeben');
     }
 
@@ -61,11 +63,11 @@ class User {
     }
 
     // Prepare password
-    $password = $sqlConnetion->real_escape_string(usersHash($pPassword));
+    $passwordHash = $sqlConnetion->real_escape_string(usersHash($pPassword));
 
     // Write user to db
     $stmt = $sqlConnetion->prepare("INSERT INTO user (user, password, email) VALUES (?, ?, ?)");
-    $stmt->bind_param('sss', $pUser, $password, $pEmail);
+    $stmt->bind_param('sss', $pUser, $passwordHash, $emailHash);
     $stmt->execute();
     $stmt->close();
   }
@@ -134,24 +136,36 @@ class User {
   }
 
   public static function changePassword($pUser, $pNewPw) {
-    if ($pNewPw)
-    $password = usersHash($pNewPw);
+    if ($pNewPw) {
+      if (strlen($pNewPw) < 6) {
+        return false;   // Too short
+      }
 
-    // Write to db
-    $sqlConnetion = User::connect();
-    $stmt = $sqlConnetion->prepare("UPDATE user SET password = ? WHERE user = ?");
-    $stmt->bind_param('ss', $password, $pUser);
-    $stmt->execute();
-    $stmt->close();
+      $password = usersHash($pNewPw);
+
+      // Write to db
+      $sqlConnetion = User::connect();
+      $stmt = $sqlConnetion->prepare("UPDATE user SET password = ? WHERE user = ?");
+      $stmt->bind_param('ss', $password, $pUser);
+      $stmt->execute();
+      $stmt->close();
         
-    return true;
+      return true;
+    }
+   
+    return false; 
   }
 
   public static function changeEmail($pUser, $pEmail) {
     if (filter_var($pEmail, FILTER_VALIDATE_EMAIL)) {
       $sqlConnetion = User::connect();
+
+      // Prepare hashed email
+      $emailHash = $sqlConnetion->real_escape_string(usersHash($pEmail));
+      $emailHashPrefix30 = substr($emailHash, 0, 30);
+
       $stmt = $sqlConnetion->prepare("UPDATE user SET email = ? WHERE user = ?;");
-      $stmt->bind_param('ss', $pEmail, $pUser);
+      $stmt->bind_param('ss', $emailHashPrefix30, $pUser);
       $stmt->execute();
       $stmt->close();
       return true;
