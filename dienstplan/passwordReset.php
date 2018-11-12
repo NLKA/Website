@@ -14,6 +14,11 @@ if ($user) {
 		return;
 	}
 
+	echo "Remote password resets are currently disabled. Please contact administrator with any questions.";
+
+	// Has to be re-written in order to handle hashed email prefixes 30!
+
+	/*
 	// Check if the requested user name exists
 	$sqlConnection = User::connect();
 	$userToReset = $_GET['user'];
@@ -44,6 +49,7 @@ if ($user) {
 	} else {
 		echo "Cannot reset password: User ".$userToReset." does not exist";
 	}
+	*/
 } else {
 	echo "Please log in first";
 }
