@@ -2,6 +2,9 @@
 
 require_once('dienstplan/config.php');
 
+/**
+Generates the on demand topbar.
+*/
 function buildOnDemandTopbar() {
     global $dbServer, $dbUser, $dbPassword, $dbName;
 
@@ -64,6 +67,9 @@ function buildOnDemandTopbar() {
     $sqlConnetion->close();
 }
 
+/**
+Builds the inline on demand block.
+*/
 function buildOnDemandInline() {
     global $dbServer, $dbUser, $dbPassword, $dbName;
 
@@ -128,7 +134,6 @@ function buildOnDemandInline() {
     }
 
     // Also display other dates
-    //$stmt = $sqlConnetion->prepare("SELECT serviceDayId, COUNT(user) FROM serviceDay LEFT JOIN serviceDayStaff ON serviceDay.serviceDayId = serviceDayStaff.serviceDayId WHERE date > CURDATE() GROUP BY serviceDayId HAVING COUNT(user) < 2 ORDER BY date ASC;");
     $stmt = $sqlConnetion->prepare("SELECT * FROM serviceDay WHERE date >= CURDATE() ORDER BY date ASC;");
     $stmt->execute();
     $results = $stmt->get_result();
@@ -179,6 +184,9 @@ function buildOnDemandInline() {
     $sqlConnetion->close();
 }
 
+/**
+Generates the on demand page content.
+*/
 function buildOnDemandPage() {
     global $dbServer, $dbUser, $dbPassword, $dbName;
 

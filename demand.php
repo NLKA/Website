@@ -2,16 +2,25 @@
 
 require_once('dienstplan/config.php');
 
-if ($_GET['origin'] == "onDemandButton") {
+/**
+Demand service for the next available date.
+@param token: A token assigned on entry, then also present in db.
+*/
+
+// Only proceed if this URL was called from the on demand button
+$callFromOnDemandButton = $_GET['origin'] == "onDemandButton";
+if ($callFromOnDemandButton) {
+    // Connect to db
 	$sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
 
-    // Check token
+    // Get token in URL query from db
     $stmt = $sqlConnetion->prepare("SELECT * FROM onDemandToken WHERE token = ? AND DATE_ADD(time, INTERVAL 1 HOUR) >= NOW()");
     $stmt->bind_param('s', $_GET['token']);
     $stmt->execute();
     $results = $stmt->get_result();
     $stmt->close();
 
+    // Check if provided token is valid
     if ($results->num_rows != 1) {
         echo "Token invalid";
         exit();
@@ -42,8 +51,8 @@ if ($_GET['origin'] == "onDemandButton") {
         $stmt->close();
 
         $serviceStaffAvailable = $resultsUsers->num_rows >= 2;
-            if ($serviceStaffAvailable) {
-                $dateOutputString = "n/a";
+        if ($serviceStaffAvailable) {
+            $dateOutputString = "n/a";
             if ($firstRow['date'] == date('Y-m-d')) {
                 $dateOutputString = "heute";
             } else {
@@ -70,20 +79,20 @@ if ($_GET['origin'] == "onDemandButton") {
                 mail($to, $subject, $message, $headers);
             }
 
-            // Redirect back
+            // Redirect back - success
             header("Location: on-demand.html?success=1");
         } else {
-            // Redirect back
+            // Redirect back - No(!) success
             header("Location: on-demand.html");
         }
     } else {
-        // Redirect back
+        // Redirect back - No(!) success
         header("Location: on-demand.html");
     }
 
     $sqlConnetion->close();
 } else {
-    // Redirect back
+    // Redirect back - No(!) success
     header("Location: on-demand.html");  
 }
 
