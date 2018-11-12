@@ -4,12 +4,16 @@ require_once('config.php');
 require_once('hashing.php');
 require_once('userFetch.php');
 
+/**
+The User class creates, accesses and alters user entries in the db. It is also used to log in users via name
+and password combination or via a session information.
+*/
 class User {
   // - - - - - - - - - - - -
   // PROPERTIES, REFERENCES
   // - - - - - - - - - - - -
   
-  private $userData;  // user, password, email (hashed!), sessionStart, sessionID
+  private $userData;  // user, password hash, email hash prefix (30 chars), sessionStart, sessionID
   private $sqlConnetion;
 
   // - - - - - - - - -
@@ -25,6 +29,11 @@ class User {
   // PUBLIC FUNCTIONS
   // - - - - - - - - -
 
+  /**
+  Access values of this object.
+  @param pValue: The key
+  @return Value corresponding to the key. Throws exception on incvalid key.
+  */
   public function __get($pValue) {
     if (isset($this->userData[$pValue])) {
       return $this->userData[$pValue];
@@ -33,10 +42,12 @@ class User {
     }
   }
 
-  public function query($pQuery) {
-    $this->sqlConnetion->query($pQuery);
-  }
-
+  /**
+  Creates a new user record in the db.
+  @param pUser: The user name (has to be unique and at least 2 characters long)
+  @param pPassword: The plain text password (at least 6 characters long)
+  @param pEmail: An email address (has to be of valid scheme)
+  */
   public static function create($pUser, $pPassword, $pEmail) {
     $sqlConnetion = User::connect();
 
@@ -62,7 +73,7 @@ class User {
       throw new Exception('Passwort zu kurz (mindestens 6 Zeichen)');
     }
 
-    // Prepare password
+    // Prepare hashed password
     $passwordHash = $sqlConnetion->real_escape_string(usersHash($pPassword));
 
     // Write user to db
@@ -72,6 +83,10 @@ class User {
     $stmt->close();
   }
   
+  /**
+  Connect to the db.
+  @return The SqlConnection.
+  */
   public static function connect() {
     global $dbName, $dbServer, $dbUser, $dbPassword;
     $sqlConnetion = new mysqli($dbServer, $dbUser, $dbPassword, $dbName);
@@ -82,6 +97,12 @@ class User {
     return $sqlConnetion;
   }
 
+  /**
+  Log in a user via name and password combination.
+  @param pUser: The user name
+  @param pPassword: The plain text password
+  @return The user object or false
+  */
   public static function loginPassword($pUser, $pPassword) {
     $passwordHashed = usersHash($pPassword);
 
@@ -105,6 +126,10 @@ class User {
     return new User($results->fetch_assoc(), $sqlConnetion);
   }
 
+ /**
+  Log in a user via session information.
+  @return The user object or false
+  */
   public static function loginSession() {
     global $sessionTimeout;
 
@@ -135,29 +160,45 @@ class User {
     return new User($resultsFetched, $sqlConnetion);
   }
 
+  /**
+  Changes the password of pUser to pNewPw.
+  @param pUser: The user name
+  @param pNewPw: The new plain text password (at least 6 characters length)
+  @return: Success
+  */
   public static function changePassword($pUser, $pNewPw) {
     if ($pNewPw) {
       if (strlen($pNewPw) < 6) {
-        return false;   // Too short
+        return false;   // Too short, no success
       }
 
-      $password = usersHash($pNewPw);
+      // Connect to db
+      $sqlConnetion = User::connect();
+
+      // Prepare hashed password
+      $passwordHash = $sqlConnetion->real_escape_string(usersHash($pNewPw));
 
       // Write to db
-      $sqlConnetion = User::connect();
       $stmt = $sqlConnetion->prepare("UPDATE user SET password = ? WHERE user = ?");
-      $stmt->bind_param('ss', $password, $pUser);
+      $stmt->bind_param('ss', $passwordHash, $pUser);
       $stmt->execute();
       $stmt->close();
         
       return true;
     }
    
-    return false; 
+    return false;   // No success
   }
 
+  /**
+  Changes the email hash of pUser based on pEmail.
+  @param pUser: The user name
+  @param pNewPw: The new email address (has to be of valid scheme)
+  @return: Success
+  */
   public static function changeEmail($pUser, $pEmail) {
     if (filter_var($pEmail, FILTER_VALIDATE_EMAIL)) {
+      // Connect to db
       $sqlConnetion = User::connect();
 
       // Prepare hashed email
@@ -170,7 +211,7 @@ class User {
       $stmt->close();
       return true;
     } else {
-      return false;
+      return false;   // No success
     }
   }
   
