@@ -26,6 +26,7 @@ if ($user) {
     	$stmt->close();
 
     	// Send mail
+    	/*
     	$to = emailForUser($sqlConnection, $userToActivate);
 		if ($to != "") {
 			$subject = 	'[NL-Bot] Account freigeschaltet';
@@ -36,6 +37,7 @@ if ($user) {
                 
 			mail(utf8_decode($to), utf8_decode($subject), utf8_decode($message), $headers);
 		}
+		*/
 
  		// Redirect if requested
 		header('Location: home.php');
