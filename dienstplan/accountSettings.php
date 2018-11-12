@@ -28,7 +28,7 @@ if (!$user) {
  			<p>Hallo <?php echo $user->user;?>! <a class='greyButton' href='logoutAccount.php'>Abmelden</a> <a class='greyButton' href='home.php'>Zurück zum Dashboard</a></p>
 			<p>Hier kannst du deine Emailadresse und Passwort ändern.</p>
 			<form action='changeOwnAccountSettings.php?type=email' method='post'>
-  				<a class='fieldLabel'>Aktuelle Adresse: <?php echo $user->email?>. Neue Emailadresse:</a><br>
+  				<a class='fieldLabel'>Neue Emailadresse:</a><br>
   				<input type="text" name="value"><br>
   				<input type= "submit" value="Ändern">
   			</form>
