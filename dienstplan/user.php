@@ -29,7 +29,8 @@ class User {
     if (isset($this->userData[$pValue])) {
       return $this->userData[$pValue];
     } else {
-      throw new Exception('User: cannot __get('.$pValue.') because it does not exist in $this->data'.print_r($this->userData));
+      // throw new Exception('User: cannot __get('.$pValue.') because it does not exist in $this->data'.print_r($this->userData));
+      throw new Exception('User: cannot __get('.$pValue.') because it does not exist');
     }
   }
 
