@@ -203,7 +203,7 @@ function buildServiceTable($pUser) {
     echo "<table border='1' style='width: 100%;'>";
     echo "<tr><th>Datum</th><th>Fand statt</th><th>Nightliner</th></tr>";
 
-    $MAX_HISTORY_ROWS = 5;
+    $MAX_HISTORY_ROWS = 3;
 
     $rowCount = 0;
     while (($row = $results->fetch_assoc()) && ($rowCount < $MAX_HISTORY_ROWS)) {
