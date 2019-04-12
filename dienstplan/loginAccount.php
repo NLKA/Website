@@ -6,7 +6,7 @@ require_once('user.php');
 session_start();
 
 // Login rate limiting
-usleep(500000);		// Sleep for 1/2 second
+usleep(1000000);		// Sleep for 1 second
 
 // Fetch data
 $username = htmlspecialchars($_POST['username']);
