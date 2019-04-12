@@ -18,6 +18,9 @@ $password = htmlspecialchars($_POST['password']);
  	<div id='content'>
  <?php
 
+// Rate limiting
+usleep(3000000);		// Sleep for 3 seconds
+
 // Attempt to create account
 try {
 	User::create($username, $password, $email);
