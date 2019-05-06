@@ -30,6 +30,8 @@ if (!$user) {
  			<h1>Nightline Karlsruhe</h1>
  			<p>Hallo <?php echo $user->user;?>! <a class='greyButton' href='logoutAccount.php'>Abmelden</a> <a class='greyButton' href='accountSettings.php'>Einstellungen</a> &nbsp;  <a class='greyButton' href='calendar.php'>Kalender</a> &nbsp; <a class='greyButton' target='_blank' href='https://intranet.nightlines.eu/foswiki/'>Wiki ↗︎</a>
 			<?php
+				echo "<h2 style='color:#fe4e31;'>Wichtig: Bitte ab jetzt im offiziellen Dinestplan im Wiki eintragen, da dieses System umgestellt wird! <a href='https://intranet.nightlines.eu/foswiki/bin/view/Karlsruhe/Dienstplan'>Link zum offiziellen Dienstplan</a></h2>";
+
 				buildLeaderBoard($user);
 				buildServiceTable($user);
 				buildUsersTable($user);
