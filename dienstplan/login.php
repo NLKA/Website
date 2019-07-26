@@ -8,7 +8,7 @@
 <body>
  	<div id='content'>
 		<h1>Nightline Karlsruhe - Login</h1>
-		<a><b>Hinweis:</b> Das Dienstplansystem wurde umgestellt, weitere Informationen im Wiki. <b>Login im alten System nur noch für bestimmte Accounts möglich.</b></a>
+		<a><b>Hinweis:</b> Das Dienstplansystem wurde umgestellt, weitere Informationen im Wiki. <b>Login im alten System nur noch für bestimmte Accounts möglich.</b></a><br/>
 		<form action='loginAccount.php' method='post'>
   			<a class='fieldLabel'>Benutzername:</a><br>
   			<input type="text" name="username"><br>
